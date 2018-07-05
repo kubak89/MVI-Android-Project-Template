@@ -1,0 +1,15 @@
+ext {
+    config = [
+            //General
+            appId            : "com.example",
+            testAppId        : "com.example.test",
+            verCode          : 1,
+            verName          : "0.1",
+
+            //Android
+            buildToolsVersion: "27.0.3",
+            minSdk           : 16,
+            targetSdk        : 27,
+            compileSdk       : 27,
+            enableMultidex   : true]
+}

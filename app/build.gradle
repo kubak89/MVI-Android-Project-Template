@@ -1,0 +1,59 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+apply from: "$rootProject.projectDir/dependencies.gradle"
+apply from: "$rootProject.projectDir/config.gradle"
+
+android {
+
+    dataBinding {
+        enabled = true
+    }
+
+    defaultConfig {
+        applicationId config.appId
+        testApplicationId config.testAppId
+        minSdkVersion config.minSdk
+        targetSdkVersion config.targetSdk
+        compileSdkVersion config.compileSdk
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        versionCode config.verCode
+        versionName config.verName
+        multiDexEnabled config.enableMultidex
+
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementationDependencies.each {
+        add("implementation", it)
+    }
+
+    kaptDependencies.each {
+        add("kapt", it)
+    }
+
+    testDependencies.each {
+        add("testImplementation", it)
+    }
+
+    instrumentedTestDependencies.each {
+        add("androidTestImplementation", it)
+    }
+}

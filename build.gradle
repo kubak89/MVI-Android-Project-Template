@@ -1,0 +1,27 @@
+apply plugin: 'com.github.ben-manes.versions'
+
+buildscript {
+    apply from: 'dependencies.gradle'
+    apply from: 'config.gradle'
+
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpathDependencies.each {
+            add("classpath", it)
+        }
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
