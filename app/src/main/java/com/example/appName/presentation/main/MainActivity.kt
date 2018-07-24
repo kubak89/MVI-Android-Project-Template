@@ -11,7 +11,8 @@ class MainActivity : BaseActivity<MainViewState, MainPresenter>(), MainView {
         setContentView(R.layout.activity_main)
 
         DaggerMainComponent.builder()
-                .mainModule(MainModule(this)).build().inject(this)
+                .mainModule(MainModule(this, savedInstanceState))
+                .build().inject(this)
 
         subscribeToViewState()
     }
