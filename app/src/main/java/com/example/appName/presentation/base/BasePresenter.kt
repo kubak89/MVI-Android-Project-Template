@@ -6,7 +6,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.BehaviorSubject
 import java.io.Serializable
 
-abstract class Presenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE> : Disposable {
+abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE> : Disposable {
     private val stateSubject: BehaviorSubject<VIEW_STATE> = BehaviorSubject.create()
     private val disposables: CompositeDisposable = CompositeDisposable()
 

@@ -1,10 +1,10 @@
 package com.example.appName.presentation.main
 
-import com.example.appName.presentation.base.Presenter
+import com.example.appName.presentation.base.BasePresenter
 import javax.inject.Inject
 
 class MainPresenter @Inject constructor(view: MainView,
-                                        initialState: MainViewState) : Presenter<MainViewState, MainPartialState>() {
+                                        initialState: MainViewState) : BasePresenter<MainViewState, MainPartialState>() {
 
     init {
         TODO("Subscribe to view intents")
