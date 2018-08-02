@@ -2,9 +2,8 @@ package com.example.appName.presentation.base
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import com.example.appName.presentation.utils.ApplicationNavigator
+import android.support.v7.app.AppCompatActivity
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.io.Serializable
@@ -23,9 +22,16 @@ abstract class BaseFragment<VIEW_STATE : Serializable, PRESENTER : BasePresenter
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(this::render)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onResume() {
+        super.onResume()
 
+        subscribeToViewState()
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        presenter.dispose()
         disposable?.dispose()
     }
 
@@ -33,6 +39,15 @@ abstract class BaseFragment<VIEW_STATE : Serializable, PRESENTER : BasePresenter
         super.onSaveInstanceState(outState)
 
         outState.putSerializable(KEY_SAVED_FRAGMENT_STATE, presenter.getCurrentViewState())
+    }
+
+
+    protected fun setActivityTitle(title: String) {
+        (activity as? AppCompatActivity)?.supportActionBar?.title = title
+    }
+
+    protected fun setDisplayHomeAsUpEnabled(homeEnabled: Boolean) {
+        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(homeEnabled)
     }
 
 

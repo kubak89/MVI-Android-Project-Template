@@ -3,11 +3,10 @@ package com.example.appName.presentation.main
 import com.example.appName.presentation.base.BasePresenter
 import javax.inject.Inject
 
-class MainPresenter @Inject constructor(view: MainView,
-                                        initialState: MainViewState) : BasePresenter<MainViewState, MainPartialState>() {
-
-    init {
-        TODO("Subscribe to view intents")
+class MainPresenter @Inject constructor(private val view: MainView,
+                                        private val initialState: MainViewState) : BasePresenter<MainViewState, MainPartialState>() {
+    override fun connectToView() {
+        TODO("Create intent observables")
 
         subscribeToViewIntents(initialState)
     }
