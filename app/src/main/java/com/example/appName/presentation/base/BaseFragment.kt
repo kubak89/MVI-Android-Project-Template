@@ -1,55 +1,73 @@
 package com.example.appName.presentation.base
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.annotation.LayoutRes
+import androidx.fragment.app.Fragment
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.HasSupportFragmentInjector
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import java.io.Serializable
 import javax.inject.Inject
 
-const val KEY_SAVED_FRAGMENT_STATE = "dashboardState"
-
-abstract class BaseFragment<VIEW_STATE : Serializable, PRESENTER : BasePresenter<VIEW_STATE, *>> : Fragment() {
-    private var disposable: Disposable? = null
+abstract class BaseFragment<VIEW_STATE : Serializable, PRESENTER : BasePresenter<VIEW_STATE, *>>(
+        @LayoutRes val layoutId: Int
+) : Fragment(), HasSupportFragmentInjector {
 
     @Inject
     lateinit var presenter: PRESENTER
 
-    protected fun subscribeToViewState() {
-        disposable = presenter.getStateObservable().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(this::render)
+    @Inject
+    lateinit var childFragmentInjector: DispatchingAndroidInjector<Fragment>
+
+    var savedInstanceState: Bundle? = null
+
+    private var disposable: Disposable? = null
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(layoutId, null, false)
     }
 
-    override fun onResume() {
-        super.onResume()
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        this.savedInstanceState = savedInstanceState
+        AndroidSupportInjection.inject(this)
+        super.onViewCreated(view, savedInstanceState)
         subscribeToViewState()
+        bind()
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onDestroy() {
+        super.onDestroy()
 
-        presenter.dispose()
         disposable?.dispose()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
-        outState.putSerializable(KEY_SAVED_FRAGMENT_STATE, presenter.getCurrentViewState())
+        outState.putSerializable(KEY_SAVED_FRAGMENT_VIEW_STATE, presenter.currentViewState)
     }
 
-
-    protected fun setActivityTitle(title: String) {
-        (activity as? AppCompatActivity)?.supportActionBar?.title = title
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+        return childFragmentInjector
     }
 
-    protected fun setDisplayHomeAsUpEnabled(homeEnabled: Boolean) {
-        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(homeEnabled)
+    protected fun subscribeToViewState() {
+        disposable = presenter.stateObservable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(this::render)
     }
 
+    open fun bind() {}
 
     abstract fun render(viewState: VIEW_STATE)
+
+    companion object {
+        const val KEY_SAVED_FRAGMENT_VIEW_STATE = "viewState"
+    }
 }

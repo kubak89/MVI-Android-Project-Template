@@ -18,7 +18,7 @@ android {
         minSdkVersion config.minSdk
         targetSdkVersion config.targetSdk
         compileSdkVersion config.compileSdk
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         versionCode config.verCode
         versionName config.verName
         multiDexEnabled config.enableMultidex
