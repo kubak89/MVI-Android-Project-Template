@@ -6,12 +6,11 @@ import android.view.WindowManager
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.example.appName.BuildConfig
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
-import dagger.android.support.HasSupportFragmentInjector
+import dagger.android.HasAndroidInjector
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -20,13 +19,13 @@ import javax.inject.Inject
 
 abstract class BaseActivity<VIEW_STATE : Serializable, PRESENTER : BasePresenter<VIEW_STATE, *>>(
         @LayoutRes val layoutId: Int
-) : AppCompatActivity(), HasSupportFragmentInjector {
+) : AppCompatActivity(), HasAndroidInjector {
 
     @Inject
     lateinit var presenter: PRESENTER
 
     @Inject
-    lateinit var fragmentInjector: DispatchingAndroidInjector<Fragment>
+    lateinit var fragmentInjector: DispatchingAndroidInjector<Any>
 
     var savedInstanceState: Bundle? = null
 
@@ -56,18 +55,15 @@ abstract class BaseActivity<VIEW_STATE : Serializable, PRESENTER : BasePresenter
                     WindowManager.LayoutParams.FLAG_SECURE
             )
         }
-        bind()
     }
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
-        return fragmentInjector
-    }
+    override fun androidInjector(): AndroidInjector<Any> = fragmentInjector
 
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
 
         val viewState = presenter.currentViewState
-        outState?.putSerializable(KEY_SAVED_ACTIVITY_VIEW_STATE, viewState)
+        outState.putSerializable(KEY_SAVED_ACTIVITY_VIEW_STATE, viewState)
     }
 
     override fun onDestroy() {
@@ -77,17 +73,13 @@ abstract class BaseActivity<VIEW_STATE : Serializable, PRESENTER : BasePresenter
         disposable?.dispose()
     }
 
-    protected fun subscribeToViewState() {
+    private fun subscribeToViewState() {
         disposable = presenter.stateObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(this::render)
     }
 
     private fun inflateView() {
         setContentView(layoutId)
-    }
-
-    open fun bind() {
-
     }
 
     abstract fun render(viewState: VIEW_STATE)

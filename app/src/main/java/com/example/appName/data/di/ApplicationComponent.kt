@@ -1,4 +1,4 @@
-package com.example.appName.common.di
+package com.example.appName.data.di
 
 import android.app.Application
 import com.example.appName.MyApplication

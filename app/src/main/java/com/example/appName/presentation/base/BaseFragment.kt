@@ -8,8 +8,8 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
+import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
-import dagger.android.support.HasSupportFragmentInjector
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -18,13 +18,13 @@ import javax.inject.Inject
 
 abstract class BaseFragment<VIEW_STATE : Serializable, PRESENTER : BasePresenter<VIEW_STATE, *>>(
         @LayoutRes val layoutId: Int
-) : Fragment(), HasSupportFragmentInjector {
+) : Fragment(), HasAndroidInjector {
 
     @Inject
     lateinit var presenter: PRESENTER
 
     @Inject
-    lateinit var childFragmentInjector: DispatchingAndroidInjector<Fragment>
+    lateinit var childFragmentInjector: DispatchingAndroidInjector<Any>
 
     var savedInstanceState: Bundle? = null
 
@@ -54,11 +54,9 @@ abstract class BaseFragment<VIEW_STATE : Serializable, PRESENTER : BasePresenter
         outState.putSerializable(KEY_SAVED_FRAGMENT_VIEW_STATE, presenter.currentViewState)
     }
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
-        return childFragmentInjector
-    }
+    override fun androidInjector(): AndroidInjector<Any> = childFragmentInjector
 
-    protected fun subscribeToViewState() {
+    private fun subscribeToViewState() {
         disposable = presenter.stateObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(this::render)
     }
