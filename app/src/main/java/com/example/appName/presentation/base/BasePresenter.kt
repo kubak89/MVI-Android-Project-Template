@@ -17,7 +17,7 @@ abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE>(
         }
     }
 
-    private val disposables: CompositeDisposable = CompositeDisposable()
+    protected val disposables: CompositeDisposable = CompositeDisposable()
 
     override fun dispose() = disposables.dispose()
 
