@@ -30,9 +30,8 @@ abstract class BaseFragment<VIEW_STATE : Serializable, PRESENTER : BasePresenter
 
     private var disposable: Disposable? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(layoutId, null, false)
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+        inflater.inflate(layoutId, null, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         this.savedInstanceState = savedInstanceState
