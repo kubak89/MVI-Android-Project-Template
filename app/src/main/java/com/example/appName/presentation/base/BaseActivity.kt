@@ -69,7 +69,6 @@ abstract class BaseActivity<VIEW_STATE : Serializable, PRESENTER : BasePresenter
     override fun onDestroy() {
         super.onDestroy()
 
-        presenter.dispose()
         disposable?.dispose()
     }
 
