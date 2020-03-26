@@ -1,4 +1,4 @@
-package com.example.appName.presentation.dummy
+package com.example.appName.presentation.features.dummy
 
 import java.io.Serializable
 

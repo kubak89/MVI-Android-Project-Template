@@ -1,9 +1,9 @@
-package com.example.appName.presentation.dummy
+package com.example.appName.presentation.features.dummy
 
 import android.os.Bundle
 import android.view.View
 import com.example.appName.R
-import com.example.appName.presentation.base.BaseActivity
+import com.example.appName.presentation.features.base.BaseActivity
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_main.*
 

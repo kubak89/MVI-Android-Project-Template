@@ -1,6 +1,6 @@
-package com.example.appName.presentation.dummy
+package com.example.appName.presentation.features.dummy
 
-import com.example.appName.presentation.base.BasePresenter
+import com.example.appName.presentation.features.base.BasePresenter
 import io.reactivex.Observable
 import javax.inject.Inject
 

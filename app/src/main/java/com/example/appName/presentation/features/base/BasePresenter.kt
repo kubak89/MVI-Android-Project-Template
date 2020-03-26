@@ -1,4 +1,4 @@
-package com.example.appName.presentation.base
+package com.example.appName.presentation.features.base
 
 import io.reactivex.Observable
 import java.io.Serializable

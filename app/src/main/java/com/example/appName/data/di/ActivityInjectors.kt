@@ -1,7 +1,7 @@
 package com.example.appName.data.di
 
-import com.example.appName.presentation.dummy.DummyActivity
-import com.example.appName.presentation.dummy.DummyModule
+import com.example.appName.presentation.features.dummy.DummyActivity
+import com.example.appName.presentation.features.dummy.DummyModule
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

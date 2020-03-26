@@ -2,7 +2,7 @@ package com.example.appName.data.di
 
 import android.app.Application
 import com.example.appName.MyApplication
-import com.example.appName.presentation.dummy.DummyModule
+import com.example.appName.presentation.features.dummy.DummyModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule

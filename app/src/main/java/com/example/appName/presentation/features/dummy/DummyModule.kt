@@ -1,6 +1,6 @@
-package com.example.appName.presentation.dummy
+package com.example.appName.presentation.features.dummy
 
-import com.example.appName.presentation.base.BaseActivity
+import com.example.appName.presentation.features.base.BaseActivity
 import dagger.Module
 import dagger.Provides
 
