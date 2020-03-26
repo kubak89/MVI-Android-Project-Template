@@ -2,7 +2,7 @@ package com.example.appName.di
 
 import android.app.Application
 import com.example.appName.MyApplication
-import com.example.appName.presentation.features.dummy.DummyModule
+import com.example.appName.presentation.features.main.MainModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
@@ -11,7 +11,7 @@ import dagger.android.support.AndroidSupportInjectionModule
     AndroidSupportInjectionModule::class,
     ApplicationModule::class,
     ActivityInjectors::class,
-    DummyModule::class
+    MainModule::class,
 ])
 interface ApplicationComponent {
 

@@ -1,8 +1,8 @@
-package com.example.appName.presentation.features.dummy
+package com.example.appName.presentation.features.main
 
 import io.reactivex.Observable
 
-interface DummyView {
+interface MainView {
     val loginIntent: Observable<Unit>
     val logoutIntent: Observable<Unit>
 }

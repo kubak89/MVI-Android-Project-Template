@@ -1,4 +1,4 @@
-package com.example.appName.presentation.features.dummy
+package com.example.appName.presentation.features.main
 
 import android.os.Bundle
 import android.view.View
@@ -7,16 +7,16 @@ import com.example.appName.presentation.features.base.BaseActivity
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_main.*
 
-class DummyActivity : BaseActivity<DummyViewState, DummyPresenter>(
+class MainActivity : BaseActivity<MainViewState, MainPresenter>(
         R.layout.activity_main
-), DummyView {
+), MainView {
     //region Intents
     override val loginIntent: PublishSubject<Unit> = PublishSubject.create<Unit>()
     override val logoutIntent: PublishSubject<Unit> = PublishSubject.create<Unit>()
     //endregion
 
     //region Render methods
-    override fun render(viewState: DummyViewState) {
+    override fun render(viewState: MainViewState) {
         with(viewState) {
             updateText(mainText)
             updateButtonsVisibility(isLoggedIn)
