@@ -26,12 +26,18 @@ class MainPresenter @Inject constructor(
     )
 
     private fun onLogoutIntent(): Observable<MainViewState.PartialState> =
-            view.logoutIntent.map { MainViewState.PartialState.WelcomeState(welcomeText = "Welcome Stranger!") }
+            view.logoutIntent.map { MainViewState.PartialState.WelcomeState(welcomeText = getGreetingsText(WELCOME_NAME)) }
 
     private fun onLoginIntent(): Observable<MainViewState.PartialState> =
             view.loginIntent.switchMap {
                 dummyUserRepository.getUser().toObservable()
-            }.map {
-                MainViewState.PartialState.LoggedState(loggedText = "Welcome ${it.name}!")
+            }.map { user ->
+                MainViewState.PartialState.LoggedState(loggedText = getGreetingsText(user.name))
             }
+
+    private fun getGreetingsText(name: String) = "Welcome $name!"
+
+    companion object {
+        const val WELCOME_NAME = "Stranger"
+    }
 }
