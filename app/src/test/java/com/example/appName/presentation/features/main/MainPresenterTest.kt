@@ -1,7 +1,7 @@
 package com.example.appName.presentation.features.main
 
 import com.example.appName.data.model.ExampleUser
-import com.example.appName.data.repository.dummyuser.ExampleUserRepository
+import com.example.appName.data.repository.exampleuser.ExampleUserRepository
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject

@@ -9,5 +9,5 @@ import dagger.android.ContributesAndroidInjector
 abstract class ActivityInjectors {
 
     @ContributesAndroidInjector(modules = [MainModule::class])
-    abstract fun bindDummyActivity(): MainActivity
+    abstract fun bindMainActivity(): MainActivity
 }

@@ -2,7 +2,7 @@ package com.example.appName.di
 
 import android.app.Application
 import com.example.appName.MyApplication
-import com.example.appName.data.repository.dummyuser.ExampleUserModule
+import com.example.appName.data.repository.exampleuser.ExampleUserModule
 import com.example.appName.presentation.features.main.MainModule
 import dagger.BindsInstance
 import dagger.Component

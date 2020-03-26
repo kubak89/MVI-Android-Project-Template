@@ -1,6 +1,6 @@
 package com.example.appName.presentation.features.main
 
-import com.example.appName.data.repository.dummyuser.ExampleUserRepository
+import com.example.appName.data.repository.exampleuser.ExampleUserRepository
 import com.example.appName.presentation.features.base.BasePresenter
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -8,7 +8,7 @@ import javax.inject.Inject
 class MainPresenter @Inject constructor(
         private val view: MainView,
         initialState: MainViewState,
-        private val dummyUserRepository: ExampleUserRepository
+        private val exampleUserRepository: ExampleUserRepository
 ) : BasePresenter<MainViewState, MainViewState.PartialState>(initialState) {
 
     override fun reduceViewState(previousState: MainViewState, partialState: MainViewState.PartialState): MainViewState {
@@ -30,7 +30,7 @@ class MainPresenter @Inject constructor(
 
     private fun onLoginIntent(): Observable<MainViewState.PartialState> =
             view.loginIntent.switchMap {
-                dummyUserRepository.getUser().toObservable()
+                exampleUserRepository.getUser().toObservable()
             }.map { user ->
                 MainViewState.PartialState.LoggedState(loggedText = getGreetingsText(user.name))
             }
