@@ -17,25 +17,23 @@ class DummyActivity : BaseActivity<DummyViewState, DummyPresenter>(
 
     //region Render methods
     override fun render(viewState: DummyViewState) {
-        updateText(viewState)
-        updateButtonsVisibility(viewState)
-    }
-
-    private fun updateText(viewState: DummyViewState) {
-        main_text.text = viewState.mainText
-    }
-
-    private fun updateButtonsVisibility(viewState: DummyViewState) {
-        login_button.visibility = if (viewState.isLoggedIn) {
-            View.GONE
-        } else {
-            View.VISIBLE
+        with(viewState) {
+            updateText(mainText)
+            updateButtonsVisibility(isLoggedIn)
         }
+    }
 
-        logout_button.visibility = if (viewState.isLoggedIn) {
-            View.VISIBLE
+    private fun updateText(text: String) {
+        main_text.text = text
+    }
+
+    private fun updateButtonsVisibility(isLoggedIn: Boolean) {
+        if (isLoggedIn) {
+            login_button.visibility = View.GONE
+            logout_button.visibility = View.VISIBLE
         } else {
-            View.GONE
+            login_button.visibility = View.VISIBLE
+            logout_button.visibility = View.GONE
         }
     }
     //endregion
