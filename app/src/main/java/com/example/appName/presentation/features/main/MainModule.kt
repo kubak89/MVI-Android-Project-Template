@@ -11,7 +11,8 @@ class MainModule {
     fun provideMainView(activity: MainActivity): MainView = activity
 
     @Provides
-    fun provideInitialMainViewState(activity: MainActivity): MainViewState = activity.savedInstanceState?.getSerializable(
-            BaseActivity.KEY_SAVED_ACTIVITY_VIEW_STATE) as? MainViewState
-            ?: MainViewState(mainText = "Welcome Stranger!", isLoggedIn = false)
+    fun provideInitialMainViewState(activity: MainActivity): MainViewState =
+            activity.savedInstanceState?.getSerializable(
+                    BaseActivity.KEY_SAVED_ACTIVITY_VIEW_STATE) as? MainViewState
+                    ?: MainViewState()
 }

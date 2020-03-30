@@ -2,6 +2,7 @@ package com.example.appName.presentation.features.main
 
 import com.example.appName.data.repository.exampleuser.ExampleUserRepository
 import com.example.appName.presentation.features.base.BasePresenter
+import com.example.appName.presentation.features.main.MainConstants.LOGGED_OUT_NAME
 import io.reactivex.Observable
 import javax.inject.Inject
 
@@ -11,14 +12,14 @@ class MainPresenter @Inject constructor(
         private val exampleUserRepository: ExampleUserRepository
 ) : BasePresenter<MainViewState, MainViewState.PartialState>(initialState) {
 
-    override fun reduceViewState(previousState: MainViewState, partialState: MainViewState.PartialState): MainViewState {
-        return when (partialState) {
-            is MainViewState.PartialState.WelcomeState ->
-                previousState.copy(mainText = partialState.welcomeText, isLoggedIn = false)
-            is MainViewState.PartialState.LoggedState ->
-                previousState.copy(mainText = partialState.loggedText, isLoggedIn = true)
-        }
-    }
+    override fun reduceViewState(previousState: MainViewState, partialState: MainViewState.PartialState): MainViewState =
+            when (partialState) {
+                is MainViewState.PartialState.WelcomeState ->
+                    previousState.copy(mainText = partialState.welcomeText, isLoggedIn = false)
+                is MainViewState.PartialState.LoggedInState ->
+                    previousState.copy(mainText = partialState.loggedInText, isLoggedIn = true)
+
+            }
 
     override fun provideViewIntents(): List<Observable<MainViewState.PartialState>> = listOf(
             onLoginIntent(),
@@ -32,12 +33,8 @@ class MainPresenter @Inject constructor(
             view.loginIntent.switchMap {
                 exampleUserRepository.getUser().toObservable()
             }.map { user ->
-                MainViewState.PartialState.LoggedState(loggedText = getGreetingsText(user.name))
+                MainViewState.PartialState.LoggedInState(loggedInText = getGreetingsText(user.name))
             }
 
     private fun getGreetingsText(name: String) = "Welcome $name!"
-
-    companion object {
-        const val WELCOME_NAME = "Stranger"
-    }
 }
