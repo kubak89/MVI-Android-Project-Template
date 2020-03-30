@@ -1,18 +1,20 @@
 package com.example.appName.presentation.features.main
 
-import android.os.Bundle
 import android.view.View
 import com.example.appName.R
 import com.example.appName.presentation.features.base.BaseActivity
-import io.reactivex.subjects.PublishSubject
+import com.jakewharton.rxbinding3.view.clicks
+import io.reactivex.Observable
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<MainViewState, MainPresenter>(
         R.layout.activity_main
 ), MainView {
     //region Intents
-    override val loginIntent: PublishSubject<Unit> = PublishSubject.create<Unit>()
-    override val logoutIntent: PublishSubject<Unit> = PublishSubject.create<Unit>()
+    override val loginIntent: Observable<Unit>
+        get() = login_button.clicks()
+    override val logoutIntent: Observable<Unit>
+        get() = logout_button.clicks()
     //endregion
 
     //region Render methods
@@ -37,19 +39,4 @@ class MainActivity : BaseActivity<MainViewState, MainPresenter>(
         }
     }
     //endregion
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        bindIntents()
-    }
-
-    private fun bindIntents() {
-        login_button.setOnClickListener {
-            loginIntent.onNext(Unit)
-        }
-
-        logout_button.setOnClickListener {
-            logoutIntent.onNext(Unit)
-        }
-    }
 }

@@ -12,7 +12,6 @@ import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import java.io.Serializable
 import javax.inject.Inject
 
@@ -31,7 +30,7 @@ abstract class BaseFragment<VIEW_STATE : Serializable, PRESENTER : BasePresenter
     private var disposable: Disposable? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(layoutId, null, false)
+            inflater.inflate(layoutId, null, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         this.savedInstanceState = savedInstanceState
@@ -56,8 +55,7 @@ abstract class BaseFragment<VIEW_STATE : Serializable, PRESENTER : BasePresenter
     override fun androidInjector(): AndroidInjector<Any> = childFragmentInjector
 
     private fun subscribeToViewState() {
-        disposable = presenter.stateObservable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(this::render)
+        disposable = presenter.stateObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(this::render)
     }
 
     open fun bind() {}
