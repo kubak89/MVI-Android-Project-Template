@@ -12,7 +12,6 @@ class MainModule {
 
     @Provides
     fun provideInitialMainViewState(activity: MainActivity): MainViewState =
-            activity.savedInstanceState?.getSerializable(
-                    BaseActivity.KEY_SAVED_ACTIVITY_VIEW_STATE) as? MainViewState
+            activity.savedInstanceState?.getSerializable(BaseActivity.KEY_SAVED_ACTIVITY_VIEW_STATE) as? MainViewState
                     ?: MainViewState()
 }
