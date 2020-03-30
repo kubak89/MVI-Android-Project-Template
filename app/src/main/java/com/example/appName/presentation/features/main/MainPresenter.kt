@@ -22,14 +22,14 @@ class MainPresenter @Inject constructor(
             }
 
     override fun provideViewIntents(): List<Observable<MainViewState.PartialState>> = listOf(
-            onLoginIntent(),
-            onLogoutIntent()
+            login(),
+            logout()
     )
 
-    private fun onLogoutIntent(): Observable<MainViewState.PartialState> =
-            view.logoutIntent.map { MainViewState.PartialState.WelcomeState(welcomeText = getGreetingsText(WELCOME_NAME)) }
+    private fun logout(): Observable<MainViewState.PartialState> =
+            view.logoutIntent.map { MainViewState.PartialState.WelcomeState(welcomeText = getGreetingsText(LOGGED_OUT_NAME)) }
 
-    private fun onLoginIntent(): Observable<MainViewState.PartialState> =
+    private fun login(): Observable<MainViewState.PartialState> =
             view.loginIntent.switchMap {
                 exampleUserRepository.getUser().toObservable()
             }.map { user ->
