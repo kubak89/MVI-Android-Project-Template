@@ -18,16 +18,16 @@ class MainActivity : BaseActivity<MainViewState, MainPresenter>(
     //region Render methods
     override fun render(viewState: MainViewState) {
         with(viewState) {
-            updateText(mainText)
-            updateButtonsVisibility(isLoggedIn)
+            renderText(mainText)
+            renderButtonsVisibility(isLoggedIn)
         }
     }
 
-    private fun updateText(text: String) {
+    private fun renderText(text: String) {
         main_text.text = text
     }
 
-    private fun updateButtonsVisibility(isLoggedIn: Boolean) {
+    private fun renderButtonsVisibility(isLoggedIn: Boolean) {
         if (isLoggedIn) {
             login_button.visibility = View.GONE
             logout_button.visibility = View.VISIBLE
