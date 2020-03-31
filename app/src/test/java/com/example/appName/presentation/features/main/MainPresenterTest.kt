@@ -2,6 +2,7 @@ package com.example.appName.presentation.features.main
 
 import com.example.appName.data.model.ExampleUser
 import com.example.appName.data.repository.exampleuser.ExampleUserRepository
+import com.example.appName.presentation.features.main.MainConstants.LOGGED_OUT_NAME
 import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.subjects.PublishSubject
@@ -60,6 +61,6 @@ class MainPresenterTest {
                 ).dispose()
     }
 
-    private fun getWelcomeViewState() = MainViewState("Welcome Stranger!", false)
-    private fun getLoggedViewState(userName: String) = MainViewState("Welcome $userName!", true)
+    private fun getWelcomeViewState() = MainViewState(LOGGED_OUT_NAME, false)
+    private fun getLoggedViewState(userName: String) = MainViewState(userName, true)
 }

@@ -15,10 +15,9 @@ class MainPresenter @Inject constructor(
     override fun reduceViewState(previousState: MainViewState, partialState: MainViewState.PartialState): MainViewState =
             when (partialState) {
                 is MainViewState.PartialState.WelcomeState ->
-                    previousState.copy(mainText = partialState.welcomeText, isLoggedIn = false)
+                    previousState.copy(name = partialState.loggedOutName, isLoggedIn = false)
                 is MainViewState.PartialState.LoggedInState ->
-                    previousState.copy(mainText = partialState.loggedInText, isLoggedIn = true)
-
+                    previousState.copy(name = partialState.loggedInName, isLoggedIn = true)
             }
 
     override fun provideViewIntents(): List<Observable<MainViewState.PartialState>> = listOf(
@@ -27,14 +26,12 @@ class MainPresenter @Inject constructor(
     )
 
     private fun logout(): Observable<MainViewState.PartialState> =
-            view.logoutIntent.map { MainViewState.PartialState.WelcomeState(welcomeText = getGreetingsText(LOGGED_OUT_NAME)) }
+            view.logoutIntent.map { MainViewState.PartialState.WelcomeState(loggedOutName = LOGGED_OUT_NAME) }
 
     private fun login(): Observable<MainViewState.PartialState> =
             view.loginIntent.switchMap {
                 exampleUserRepository.getUser().toObservable()
             }.map { user ->
-                MainViewState.PartialState.LoggedInState(loggedInText = getGreetingsText(user.name))
+                MainViewState.PartialState.LoggedInState(loggedInName = user.name)
             }
-
-    private fun getGreetingsText(name: String) = "Welcome $name!"
 }

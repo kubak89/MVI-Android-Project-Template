@@ -4,11 +4,11 @@ import com.example.appName.presentation.features.main.MainConstants.LOGGED_OUT_N
 import java.io.Serializable
 
 data class MainViewState(
-        val mainText: String = "Welcome $LOGGED_OUT_NAME!",
+        val name: String = LOGGED_OUT_NAME,
         val isLoggedIn: Boolean = false
 ) : Serializable {
     sealed class PartialState {
-        data class WelcomeState(val welcomeText: String) : PartialState()
-        data class LoggedInState(val loggedInText: String) : PartialState()
+        data class WelcomeState(val loggedOutName: String) : PartialState()
+        data class LoggedInState(val loggedInName: String) : PartialState()
     }
 }
