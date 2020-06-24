@@ -1,0 +1,17 @@
+apply plugin: 'io.gitlab.arturbosch.detekt'
+
+detekt {
+    toolVersion = versions.detekt
+    config = files("$rootDir/detekt.yml")
+    buildUponDefaultConfig = true
+
+    reports {
+        html {
+            enabled = true
+            destination = file('out/reports/detekt.html')
+        }
+        xml.enabled = false
+    }
+}
+
+tasks.detekt.jvmTarget = "1.8"

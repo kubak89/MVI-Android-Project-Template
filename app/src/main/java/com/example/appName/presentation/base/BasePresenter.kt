@@ -1,8 +1,6 @@
 package com.example.appName.presentation.base
 
 import io.reactivex.Observable
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import java.io.Serializable
 
 abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE>(
@@ -12,13 +10,13 @@ abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE>(
         private set
 
     val stateObservable: Observable<VIEW_STATE> by lazy {
-        subscribeToViewIntents(initialState, *provideViewIntents().toTypedArray()).doOnNext {
+        subscribeToViewIntents(initialState, provideViewIntents()).doOnNext {
             currentViewState = it
         }
     }
-    
-    private fun subscribeToViewIntents(initialState: VIEW_STATE, vararg observables: Observable<PARTIAL_VIEW_STATE>) = Observable
-            .merge(observables.asList())
+
+    private fun subscribeToViewIntents(initialState: VIEW_STATE, observables: List<Observable<PARTIAL_VIEW_STATE>>) = Observable
+            .merge(observables)
             .scan(initialState, this::reduceViewState)
 
     protected abstract fun provideViewIntents(): List<Observable<PARTIAL_VIEW_STATE>>
