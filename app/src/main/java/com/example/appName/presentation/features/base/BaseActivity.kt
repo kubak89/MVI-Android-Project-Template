@@ -1,4 +1,4 @@
-package com.example.appName.presentation.base
+package com.example.appName.presentation.features.base
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -11,9 +11,8 @@ import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.disposables.Disposable
 import java.io.Serializable
 import javax.inject.Inject
 
@@ -73,8 +72,7 @@ abstract class BaseActivity<VIEW_STATE : Serializable, PRESENTER : BasePresenter
     }
 
     private fun subscribeToViewState() {
-        disposable = presenter.stateObservable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).subscribe(this::render)
+        disposable = presenter.stateObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(this::render)
     }
 
     private fun inflateView() {

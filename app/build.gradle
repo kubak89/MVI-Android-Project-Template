@@ -48,22 +48,21 @@ dependencies {
     implementation "com.google.dagger:dagger-android-support:${versions.dagger}"
     implementation "com.google.dagger:dagger:${versions.dagger}"
 
-    implementation "io.reactivex.rxjava2:rxjava:${versions.rxJava}"
-    implementation "io.reactivex.rxjava2:rxandroid:${versions.rxAndroid}"
-    implementation "io.reactivex.rxjava2:rxkotlin:${versions.rxKotlin}"
+    implementation "io.reactivex.rxjava3:rxjava:${versions.rxJava}"
+    implementation "io.reactivex.rxjava3:rxandroid:${versions.rxAndroid}"
+    implementation "io.reactivex.rxjava3:rxkotlin:${versions.rxKotlin}"
 
-    implementation "com.jakewharton.rxbinding3:rxbinding:${versions.rxBinding}"
-    implementation "com.jakewharton.rxbinding3:rxbinding-core:${versions.rxBinding}"
-    implementation "com.jakewharton.rxbinding3:rxbinding-appcompat:${versions.rxBinding}"
-    implementation "com.jakewharton.rxbinding3:rxbinding-recyclerview:${versions.rxBinding}"
-    implementation "com.jakewharton.rxbinding3:rxbinding-material:${versions.rxBinding}"
+    implementation "com.jakewharton.rxbinding4:rxbinding:${versions.rxBinding}"
+    implementation "com.jakewharton.rxbinding4:rxbinding-core:${versions.rxBinding}"
+    implementation "com.jakewharton.rxbinding4:rxbinding-appcompat:${versions.rxBinding}"
+    implementation "com.jakewharton.rxbinding4:rxbinding-recyclerview:${versions.rxBinding}"
+    implementation "com.jakewharton.rxbinding4:rxbinding-material:${versions.rxBinding}"
 
     implementation "com.google.android.material:material:${versions.material}"
     implementation "org.jetbrains.anko:anko-commons:${versions.anko}"
     implementation "com.github.bumptech.glide:glide:${versions.glide}"
 
     implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}"
     implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
 
     implementation "androidx.core:core:${versions.core}"

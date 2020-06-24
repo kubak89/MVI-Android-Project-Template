@@ -1,14 +1,21 @@
-package com.example.appName.data.di
+package com.example.appName.di
 
 import android.app.Application
 import com.example.appName.MyApplication
+import com.example.appName.data.repository.exampleuser.ExampleUserModule
+import com.example.appName.presentation.features.main.MainModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
+import javax.inject.Singleton
 
+@Singleton
 @Component(modules = [
     AndroidSupportInjectionModule::class,
-    ApplicationModule::class
+    ApplicationModule::class,
+    ActivityInjectors::class,
+    MainModule::class,
+    ExampleUserModule::class
 ])
 interface ApplicationComponent {
 

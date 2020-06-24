@@ -1,4 +1,4 @@
-package com.example.appName.data.di
+package com.example.appName.di
 
 import android.app.Application
 import android.content.Context
