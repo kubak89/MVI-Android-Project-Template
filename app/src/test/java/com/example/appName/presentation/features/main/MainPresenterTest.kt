@@ -3,8 +3,8 @@ package com.example.appName.presentation.features.main
 import com.example.appName.data.model.ExampleUser
 import com.example.appName.data.repository.exampleuser.ExampleUserRepository
 import com.example.appName.presentation.features.main.MainConstants.LOGGED_OUT_NAME
-import io.reactivex.Observable
-import io.reactivex.Single
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import io.reactivex.subjects.PublishSubject
 import org.junit.Before
 import org.junit.Test

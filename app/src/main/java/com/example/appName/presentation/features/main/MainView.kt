@@ -1,6 +1,6 @@
 package com.example.appName.presentation.features.main
 
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 interface MainView {
     val loginIntent: Observable<Unit>

@@ -3,8 +3,8 @@ package com.example.appName.presentation.features.main
 import android.view.View
 import com.example.appName.R
 import com.example.appName.presentation.features.base.BaseActivity
-import com.jakewharton.rxbinding3.view.clicks
-import io.reactivex.Observable
+import com.jakewharton.rxbinding4.view.clicks
+import io.reactivex.rxjava3.core.Observable
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity<MainViewState, MainPresenter>(
