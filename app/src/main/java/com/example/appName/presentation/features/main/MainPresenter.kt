@@ -3,7 +3,7 @@ package com.example.appName.presentation.features.main
 import com.example.appName.data.repository.exampleuser.ExampleUserRepository
 import com.example.appName.presentation.features.base.BasePresenter
 import com.example.appName.presentation.features.main.MainConstants.LOGGED_OUT_NAME
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
 
 class MainPresenter @Inject constructor(

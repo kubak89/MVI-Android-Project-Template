@@ -1,6 +1,6 @@
 package com.example.appName.presentation.features.base
 
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import java.io.Serializable
 
 abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE>(
