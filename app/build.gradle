@@ -32,6 +32,7 @@ android {
     }
 
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -99,5 +100,9 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-intents:${versions.espresso}"
     androidTestImplementation "androidx.test:runner:${versions.runner}"
     androidTestImplementation "org.awaitility:awaitility:${versions.awaitility}"
+    //endregion
+
+    //region desugaring
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:${versions.desugaring}"
     //endregion
 }
