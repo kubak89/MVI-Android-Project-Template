@@ -20,7 +20,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         versionCode config.verCode
         versionName config.verName
-        multiDexEnabled config.enableMultidex
 
         vectorDrawables.useSupportLibrary = true
     }
