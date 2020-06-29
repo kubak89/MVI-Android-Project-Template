@@ -10,8 +10,7 @@ ext {
             minSdk           : 21,
             buildToolsVersion: "29.0.3",
             targetSdk        : 29,
-            compileSdk       : 29,
-            enableMultidex   : true
+            compileSdk       : 29
     ]
 
 
