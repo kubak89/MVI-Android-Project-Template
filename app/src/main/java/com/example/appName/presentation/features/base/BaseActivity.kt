@@ -6,17 +6,17 @@ import android.view.WindowManager
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.example.appName.BuildConfig
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
 import java.io.Serializable
 import javax.inject.Inject
 
-abstract class BaseActivity<VIEW_STATE : Serializable, PRESENTER : BasePresenter<VIEW_STATE, *>>(
+abstract class BaseActivity<VIEW_STATE : Serializable, PRESENTER : BasePresenter<VIEW_STATE, *, *>>(
         @LayoutRes val layoutId: Int
 ) : AppCompatActivity(), HasAndroidInjector {
 
@@ -25,8 +25,6 @@ abstract class BaseActivity<VIEW_STATE : Serializable, PRESENTER : BasePresenter
 
     @Inject
     lateinit var fragmentInjector: DispatchingAndroidInjector<Any>
-
-    var savedInstanceState: Bundle? = null
 
     private var disposable: Disposable? = null
 
@@ -41,7 +39,6 @@ abstract class BaseActivity<VIEW_STATE : Serializable, PRESENTER : BasePresenter
 
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
-        this.savedInstanceState = savedInstanceState
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
@@ -58,13 +55,6 @@ abstract class BaseActivity<VIEW_STATE : Serializable, PRESENTER : BasePresenter
 
     override fun androidInjector(): AndroidInjector<Any> = fragmentInjector
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-
-        val viewState = presenter.currentViewState
-        outState.putSerializable(KEY_SAVED_ACTIVITY_VIEW_STATE, viewState)
-    }
-
     override fun onDestroy() {
         super.onDestroy()
 
@@ -72,7 +62,7 @@ abstract class BaseActivity<VIEW_STATE : Serializable, PRESENTER : BasePresenter
     }
 
     private fun subscribeToViewState() {
-        disposable = presenter.stateObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(this::render)
+        presenter.stateObservable.observe(this, Observer { render(it) })
     }
 
     private fun inflateView() {
