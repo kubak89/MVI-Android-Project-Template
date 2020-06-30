@@ -6,7 +6,7 @@ import android.view.WindowManager
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import com.example.appName.BuildConfig
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
@@ -43,7 +43,7 @@ abstract class BaseActivity<VIEW_STATE : Serializable, PRESENTER : BasePresenter
         super.onCreate(savedInstanceState)
 
         inflateView()
-        subscribeToViewState()
+        observeViewState()
 
         if (!BuildConfig.DEBUG) {
             window.setFlags(
@@ -61,8 +61,8 @@ abstract class BaseActivity<VIEW_STATE : Serializable, PRESENTER : BasePresenter
         disposable?.dispose()
     }
 
-    private fun subscribeToViewState() {
-        presenter.stateLiveData.observe(this, Observer { render(it) })
+    private fun observeViewState() {
+        presenter.stateLiveData.observe(this, ::render)
     }
 
     private fun inflateView() {

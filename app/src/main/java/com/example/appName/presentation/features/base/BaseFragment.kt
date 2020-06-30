@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import androidx.lifecycle.observe
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
@@ -33,7 +33,7 @@ abstract class BaseFragment<VIEW_STATE : Serializable, PRESENTER : BasePresenter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         AndroidSupportInjection.inject(this)
         super.onViewCreated(view, savedInstanceState)
-        subscribeToViewState()
+        observeViewState()
         bind()
     }
 
@@ -45,8 +45,8 @@ abstract class BaseFragment<VIEW_STATE : Serializable, PRESENTER : BasePresenter
 
     override fun androidInjector(): AndroidInjector<Any> = childFragmentInjector
 
-    private fun subscribeToViewState() {
-        presenter.stateLiveData.observe(viewLifecycleOwner, Observer { render(it) })
+    private fun observeViewState() {
+        presenter.stateLiveData.observe(viewLifecycleOwner, ::render)
     }
 
     open fun bind() {}
