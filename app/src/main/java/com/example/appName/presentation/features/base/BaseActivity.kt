@@ -70,8 +70,4 @@ abstract class BaseActivity<VIEW_STATE : Serializable, PRESENTER : BasePresenter
     }
 
     abstract fun render(viewState: VIEW_STATE)
-
-    companion object {
-        const val KEY_SAVED_ACTIVITY_VIEW_STATE = "viewState"
-    }
 }

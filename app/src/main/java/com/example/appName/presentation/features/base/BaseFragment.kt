@@ -52,8 +52,4 @@ abstract class BaseFragment<VIEW_STATE : Serializable, PRESENTER : BasePresenter
     open fun bind() {}
 
     abstract fun render(viewState: VIEW_STATE)
-
-    companion object {
-        const val KEY_SAVED_FRAGMENT_VIEW_STATE = "viewState"
-    }
 }
