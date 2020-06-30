@@ -39,6 +39,6 @@ class TestObserver<T> : Observer<T> {
 }
 
 fun <T> LiveData<T>.test(): TestObserver<T> =
-        TestObserver<T>().apply {
-            this@test.observeForever(this)
+        TestObserver<T>().also {
+            this.observeForever(it)
         }
