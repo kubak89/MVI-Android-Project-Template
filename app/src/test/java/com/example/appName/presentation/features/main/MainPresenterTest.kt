@@ -4,8 +4,8 @@ import com.example.appName.BaseTest
 import com.example.appName.data.model.ExampleUser
 import com.example.appName.data.repository.exampleuser.ExampleUserRepository
 import com.example.appName.presentation.features.main.MainConstants.LOGGED_OUT_NAME
+import com.example.appName.utils.test
 import io.reactivex.rxjava3.core.Single
-import org.junit.Assert
 import org.junit.Test
 
 class MainPresenterTest : BaseTest() {
@@ -20,17 +20,16 @@ class MainPresenterTest : BaseTest() {
         // given
         val initialState = getWelcomeViewState()
         val mainPresenter = MainPresenter(initialState, exampleUserRepository)
-        val result = mutableListOf<MainViewState>()
 
         // when
-        mainPresenter.stateLiveData.observeForever { result.add(it) }
+        val testObserver = mainPresenter.stateLiveData.test()
         mainPresenter.acceptIntent(MainIntent.Login)
 
         // then
-        Assert.assertEquals(
-                listOf(getWelcomeViewState(),
-                        getLoggedViewState(testUser.name)),
-                result)
+        testObserver.assertValues(
+                getWelcomeViewState(),
+                getLoggedViewState(testUser.name)
+        )
     }
 
     @Test
@@ -38,18 +37,16 @@ class MainPresenterTest : BaseTest() {
         // given
         val initialState = getLoggedViewState(testUser.name)
         val mainPresenter = MainPresenter(initialState, exampleUserRepository)
-        val result = mutableListOf<MainViewState>()
 
         // when
-        mainPresenter.stateLiveData.observeForever { result.add(it) }
+        val testObserver = mainPresenter.stateLiveData.test()
         mainPresenter.acceptIntent(MainIntent.Logout)
 
         // then
-        Assert.assertEquals(
-                listOf(
-                        getLoggedViewState(testUser.name),
-                        getWelcomeViewState()
-                ), result)
+        testObserver.assertValues(
+                getLoggedViewState(testUser.name),
+                getWelcomeViewState()
+        )
     }
 
     private fun getWelcomeViewState() = MainViewState(LOGGED_OUT_NAME, false)
