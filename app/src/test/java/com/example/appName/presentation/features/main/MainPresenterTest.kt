@@ -1,29 +1,19 @@
 package com.example.appName.presentation.features.main
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.example.appName.BaseTest
 import com.example.appName.data.model.ExampleUser
 import com.example.appName.data.repository.exampleuser.ExampleUserRepository
 import com.example.appName.presentation.features.main.MainConstants.LOGGED_OUT_NAME
 import io.reactivex.rxjava3.core.Single
 import org.junit.Assert
-import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 
-class MainPresenterTest {
-    @Rule
-    @JvmField
-    var testSchedulerRule = InstantTaskExecutorRule()
-
-    private lateinit var exampleUserRepository: ExampleUserRepository
-    private val testUser = ExampleUser("John")
-
-    @Before
-    fun setUp() {
-        exampleUserRepository = object : ExampleUserRepository {
-            override fun getUser(): Single<ExampleUser> = Single.just(testUser)
-        }
+class MainPresenterTest : BaseTest() {
+    private val exampleUserRepository: ExampleUserRepository = object : ExampleUserRepository {
+        override fun getUser(): Single<ExampleUser> = Single.just(testUser)
     }
+
+    private val testUser = ExampleUser("John")
 
     @Test
     fun `given logged out state, when login emits value then state contains logged in status and proper user name`() {
@@ -33,7 +23,7 @@ class MainPresenterTest {
         val result = mutableListOf<MainViewState>()
 
         // when
-        mainPresenter.stateObservable.observeForever { result.add(it) }
+        mainPresenter.stateLiveData.observeForever { result.add(it) }
         mainPresenter.acceptIntent(MainIntent.Login)
 
         // then
@@ -51,7 +41,7 @@ class MainPresenterTest {
         val result = mutableListOf<MainViewState>()
 
         // when
-        mainPresenter.stateObservable.observeForever { result.add(it) }
+        mainPresenter.stateLiveData.observeForever { result.add(it) }
         mainPresenter.acceptIntent(MainIntent.Logout)
 
         // then
