@@ -46,7 +46,7 @@ abstract class BaseFragment<VIEW_STATE : Serializable, PRESENTER : BasePresenter
     override fun androidInjector(): AndroidInjector<Any> = childFragmentInjector
 
     private fun subscribeToViewState() {
-        presenter.stateObservable.observe(viewLifecycleOwner, Observer { render(it) })
+        presenter.stateLiveData.observe(viewLifecycleOwner, Observer { render(it) })
     }
 
     open fun bind() {}

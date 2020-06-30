@@ -62,7 +62,7 @@ abstract class BaseActivity<VIEW_STATE : Serializable, PRESENTER : BasePresenter
     }
 
     private fun subscribeToViewState() {
-        presenter.stateObservable.observe(this, Observer { render(it) })
+        presenter.stateLiveData.observe(this, Observer { render(it) })
     }
 
     private fun inflateView() {
