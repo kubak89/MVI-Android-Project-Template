@@ -1,5 +1,6 @@
 package com.example.appName.presentation.features.base
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -13,9 +14,11 @@ import java.io.Serializable
 abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE, INTENT>(
         initialState: VIEW_STATE
 ) : ViewModel() {
-    val stateLiveData: MutableLiveData<VIEW_STATE> = MutableLiveData<VIEW_STATE>()
+    val stateLiveData: LiveData<VIEW_STATE> get() = mutableStateLiveData
 
     protected val intentProcessor: FlowableProcessor<INTENT> = PublishProcessor.create()
+
+    private val mutableStateLiveData: MutableLiveData<VIEW_STATE> = MutableLiveData<VIEW_STATE>()
 
     private var disposable: Disposable? = null
 
@@ -39,7 +42,7 @@ abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE, INTE
                     .scan(initialState, this::reduceViewState)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ stateLiveData.value = it }, { it.printStackTrace() })
+                    .subscribe({ mutableStateLiveData.value = it }, { it.printStackTrace() })
 
     protected abstract fun provideViewIntents(): Flowable<PARTIAL_VIEW_STATE>
 
