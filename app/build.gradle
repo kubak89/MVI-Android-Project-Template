@@ -31,6 +31,12 @@ android {
         }
     }
 
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
+    }
+
     compileOptions {
         coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -76,6 +82,8 @@ dependencies {
 
     implementation "androidx.navigation:navigation-fragment-ktx:${versions.navigation}"
     implementation "androidx.navigation:navigation-ui-ktx:${versions.navigation}"
+
+    implementation "androidx.lifecycle:lifecycle-reactivestreams:${versions.lifecycle}"
     //endregion
 
     //region kapt dependencies
@@ -93,6 +101,7 @@ dependencies {
     testImplementation "junit:junit:${versions.junit}"
     testImplementation "org.mockito:mockito-inline:${versions.mockitoInline}"
     testImplementation "com.nhaarman:mockito-kotlin:${versions.mockitoKotlin}"
+    testImplementation "androidx.arch.core:core-testing:2.1.0"
     //endregion
 
     //region instrumentation test dependencies

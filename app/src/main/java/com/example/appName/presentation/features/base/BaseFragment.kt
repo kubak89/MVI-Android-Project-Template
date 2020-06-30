@@ -6,16 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.observe
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
 import dagger.android.support.AndroidSupportInjection
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.Disposable
 import java.io.Serializable
 import javax.inject.Inject
 
-abstract class BaseFragment<VIEW_STATE : Serializable, PRESENTER : BasePresenter<VIEW_STATE, *>>(
+abstract class BaseFragment<VIEW_STATE : Serializable, PRESENTER : BasePresenter<VIEW_STATE, *, *>>(
         @LayoutRes val layoutId: Int
 ) : Fragment(), HasAndroidInjector {
 
@@ -25,18 +25,15 @@ abstract class BaseFragment<VIEW_STATE : Serializable, PRESENTER : BasePresenter
     @Inject
     lateinit var childFragmentInjector: DispatchingAndroidInjector<Any>
 
-    var savedInstanceState: Bundle? = null
-
     private var disposable: Disposable? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(layoutId, null, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        this.savedInstanceState = savedInstanceState
         AndroidSupportInjection.inject(this)
         super.onViewCreated(view, savedInstanceState)
-        subscribeToViewState()
+        observeViewState()
         bind()
     }
 
@@ -46,23 +43,13 @@ abstract class BaseFragment<VIEW_STATE : Serializable, PRESENTER : BasePresenter
         disposable?.dispose()
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-
-        outState.putSerializable(KEY_SAVED_FRAGMENT_VIEW_STATE, presenter.currentViewState)
-    }
-
     override fun androidInjector(): AndroidInjector<Any> = childFragmentInjector
 
-    private fun subscribeToViewState() {
-        disposable = presenter.stateObservable.observeOn(AndroidSchedulers.mainThread()).subscribe(this::render)
+    private fun observeViewState() {
+        presenter.stateLiveData.observe(viewLifecycleOwner, ::render)
     }
 
     open fun bind() {}
 
     abstract fun render(viewState: VIEW_STATE)
-
-    companion object {
-        const val KEY_SAVED_FRAGMENT_VIEW_STATE = "viewState"
-    }
 }
