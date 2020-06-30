@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.processors.FlowableProcessor
 import io.reactivex.rxjava3.processors.PublishProcessor
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -16,9 +17,17 @@ abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE, INTE
 
     protected val intentProcessor: FlowableProcessor<INTENT> = PublishProcessor.create()
 
+    private var disposable: Disposable? = null
+
     init {
         @Suppress("LeakingThis")
-        subscribeToViewIntents(initialState, provideViewIntents())
+        disposable = subscribeToViewIntents(initialState, provideViewIntents())
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+
+        disposable?.dispose()
     }
 
     fun acceptIntent(intent: INTENT) {
