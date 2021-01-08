@@ -2,13 +2,18 @@ package com.example.appName.presentation.features.main
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import com.example.appName.R
 import com.example.appName.presentation.features.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<MainViewState, MainPresenter>(
         R.layout.activity_main
 ) {
+    override val presenter by viewModels<MainPresenter>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

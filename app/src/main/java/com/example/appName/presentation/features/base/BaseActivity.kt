@@ -8,23 +8,14 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.observe
 import com.example.appName.BuildConfig
-import dagger.android.AndroidInjection
-import dagger.android.AndroidInjector
-import dagger.android.DispatchingAndroidInjector
-import dagger.android.HasAndroidInjector
 import io.reactivex.rxjava3.disposables.Disposable
 import java.io.Serializable
-import javax.inject.Inject
 
 abstract class BaseActivity<VIEW_STATE : Serializable, PRESENTER : BasePresenter<VIEW_STATE, *, *>>(
         @LayoutRes val layoutId: Int
-) : AppCompatActivity(), HasAndroidInjector {
+) : AppCompatActivity() {
 
-    @Inject
-    lateinit var presenter: PRESENTER
-
-    @Inject
-    lateinit var fragmentInjector: DispatchingAndroidInjector<Any>
+    abstract val presenter: PRESENTER
 
     private var disposable: Disposable? = null
 
@@ -39,7 +30,6 @@ abstract class BaseActivity<VIEW_STATE : Serializable, PRESENTER : BasePresenter
 
     @CallSuper
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
 
         inflateView()
@@ -52,8 +42,6 @@ abstract class BaseActivity<VIEW_STATE : Serializable, PRESENTER : BasePresenter
             )
         }
     }
-
-    override fun androidInjector(): AndroidInjector<Any> = fragmentInjector
 
     override fun onDestroy() {
         super.onDestroy()
