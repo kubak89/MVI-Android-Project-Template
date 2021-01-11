@@ -83,7 +83,6 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:${versions.navigation}"
 
     implementation "androidx.lifecycle:lifecycle-reactivestreams:${versions.lifecycle}"
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     //endregion
 
     //region kapt dependencies
