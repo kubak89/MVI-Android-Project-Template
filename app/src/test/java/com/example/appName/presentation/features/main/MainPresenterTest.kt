@@ -3,9 +3,12 @@ package com.example.appName.presentation.features.main
 import com.example.appName.BaseTest
 import com.example.appName.data.model.ExampleUser
 import com.example.appName.data.repository.exampleuser.ExampleUserRepository
+import com.example.appName.presentation.features.base.SchedulersFactory
 import com.example.appName.presentation.features.main.MainConstants.LOGGED_OUT_NAME
+import com.example.appName.utils.TestSchedulersFactory
 import com.example.appName.utils.test
 import io.reactivex.rxjava3.core.Single
+import org.junit.Before
 import org.junit.Test
 
 class MainPresenterTest : BaseTest() {
@@ -14,6 +17,11 @@ class MainPresenterTest : BaseTest() {
     }
 
     private val testUser = ExampleUser("John")
+
+    @Before
+    fun setup() {
+        SchedulersFactory.set(TestSchedulersFactory())
+    }
 
     @Test
     fun `given logged out state, when login emits value then state contains logged in status and proper user name`() {

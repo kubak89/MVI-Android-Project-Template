@@ -3,15 +3,11 @@ package com.example.appName.presentation.features.base
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.processors.FlowableProcessor
 import io.reactivex.rxjava3.processors.PublishProcessor
-import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.Serializable
-import java.util.concurrent.Executor
-import java.util.concurrent.Executors
 
 abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE, INTENT>(
         initialState: VIEW_STATE
@@ -23,8 +19,6 @@ abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE, INTE
     private val mutableStateLiveData: MutableLiveData<VIEW_STATE> = MutableLiveData<VIEW_STATE>()
 
     private var disposable: Disposable? = null
-
-    private val executor: Executor = Executors.newSingleThreadExecutor()
 
     init {
         @Suppress("LeakingThis")
@@ -43,9 +37,9 @@ abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE, INTE
 
     private fun subscribeToViewIntents(initialState: VIEW_STATE, flowables: Flowable<PARTIAL_VIEW_STATE>) =
             flowables
-                    .observeOn(Schedulers.from(executor))
+                    .observeOn(SchedulersFactory.reducer)
                     .scan(initialState, this::reduceViewState)
-                    .observeOn(AndroidSchedulers.mainThread())
+                    .observeOn(SchedulersFactory.main)
                     .subscribe({ mutableStateLiveData.value = it }, { it.printStackTrace() })
 
     protected abstract fun provideViewIntents(): Flowable<PARTIAL_VIEW_STATE>
