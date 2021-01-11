@@ -10,6 +10,8 @@ import io.reactivex.rxjava3.processors.FlowableProcessor
 import io.reactivex.rxjava3.processors.PublishProcessor
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.Serializable
+import java.util.concurrent.Executor
+import java.util.concurrent.Executors
 
 abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE, INTENT>(
         initialState: VIEW_STATE
@@ -21,6 +23,8 @@ abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE, INTE
     private val mutableStateLiveData: MutableLiveData<VIEW_STATE> = MutableLiveData<VIEW_STATE>()
 
     private var disposable: Disposable? = null
+
+    private val executor: Executor = Executors.newSingleThreadExecutor()
 
     init {
         @Suppress("LeakingThis")
@@ -39,8 +43,8 @@ abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE, INTE
 
     private fun subscribeToViewIntents(initialState: VIEW_STATE, flowables: Flowable<PARTIAL_VIEW_STATE>) =
             flowables
+                    .observeOn(Schedulers.from(executor))
                     .scan(initialState, this::reduceViewState)
-                    .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ mutableStateLiveData.value = it }, { it.printStackTrace() })
 
