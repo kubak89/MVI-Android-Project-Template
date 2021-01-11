@@ -39,8 +39,8 @@ abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE, INTE
 
     private fun subscribeToViewIntents(initialState: VIEW_STATE, flowables: Flowable<PARTIAL_VIEW_STATE>) =
             flowables
+                    .observeOn(Schedulers.io())
                     .scan(initialState, this::reduceViewState)
-                    .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ mutableStateLiveData.value = it }, { it.printStackTrace() })
 
