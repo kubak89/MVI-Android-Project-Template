@@ -3,7 +3,6 @@ package com.example.appName.presentation.features.base
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.schedulers.Schedulers
-import java.util.concurrent.Executors
 
 interface SchedulersFactory {
 

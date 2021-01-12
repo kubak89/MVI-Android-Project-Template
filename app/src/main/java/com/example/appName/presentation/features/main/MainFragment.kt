@@ -1,11 +1,7 @@
 package com.example.appName.presentation.features.main
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import com.example.appName.R
 import com.example.appName.presentation.features.base.BaseFragment
