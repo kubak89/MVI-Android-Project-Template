@@ -1,35 +1,43 @@
 package com.example.appName.presentation.features.base
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import hu.akarnokd.rxjava3.subjects.UnicastWorkSubject
 import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.processors.FlowableProcessor
 import io.reactivex.rxjava3.processors.PublishProcessor
+import io.reactivex.rxjava3.subjects.BehaviorSubject
 import java.io.Serializable
 
-abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE, INTENT>(
+abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE, INTENT, VIEW_EVENT>(
         initialState: VIEW_STATE
 ) : ViewModel() {
-    val stateLiveData: LiveData<VIEW_STATE> get() = mutableStateLiveData
+    val viewState: Observable<VIEW_STATE> get() = viewStateSubject
 
     protected val intentProcessor: FlowableProcessor<INTENT> = PublishProcessor.create()
 
-    private val mutableStateLiveData: MutableLiveData<VIEW_STATE> = MutableLiveData<VIEW_STATE>()
+    private val viewStateSubject: BehaviorSubject<VIEW_STATE> = BehaviorSubject.create()
 
     private val disposable: Disposable
     private val reduceScheduler = SchedulersFactory.newExecutor
 
     init {
-        @Suppress("LeakingThis")
         disposable = subscribeToViewIntents(initialState, provideViewIntents())
     }
 
     override fun onCleared() {
         super.onCleared()
+        disposable.dispose()
+    }
 
-        disposable?.dispose()
+
+    private val viewEventsSubject: UnicastWorkSubject<VIEW_EVENT> = UnicastWorkSubject.create()
+    val viewEvents: Observable<VIEW_EVENT> get() = viewEventsSubject
+
+
+    protected fun publishEvent(event: VIEW_EVENT) {
+        viewEventsSubject.onNext(event)
     }
 
     fun acceptIntent(intent: INTENT) {
@@ -41,7 +49,7 @@ abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE, INTE
                     .observeOn(reduceScheduler)
                     .scan(initialState, this::reduceViewState)
                     .observeOn(SchedulersFactory.main)
-                    .subscribe({ mutableStateLiveData.value = it }, { it.printStackTrace() })
+                    .subscribe({ viewStateSubject.onNext(it) }, { it.printStackTrace() })
 
     protected abstract fun provideViewIntents(): Flowable<PARTIAL_VIEW_STATE>
 

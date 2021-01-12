@@ -10,7 +10,7 @@ import io.reactivex.rxjava3.core.Flowable
 class MainPresenter @ViewModelInject constructor(
         initialState: MainViewState,
         private val exampleUserRepository: ExampleUserRepository
-) : BasePresenter<MainViewState, MainViewState.PartialState, MainIntent>(initialState) {
+) : BasePresenter<MainViewState, MainViewState.PartialState, MainIntent, MainEvent>(initialState) {
 
     override fun reduceViewState(previousState: MainViewState, partialState: MainViewState.PartialState): MainViewState =
             when (partialState) {
@@ -28,12 +28,20 @@ class MainPresenter @ViewModelInject constructor(
                 }
             }
 
-    private fun logout(): Flowable<MainViewState.PartialState> =
-            Flowable.just(WelcomeState(loggedOutName = MainConstants.LOGGED_OUT_NAME))
+    private fun logout(): Flowable<MainViewState.PartialState> {
+        return Flowable.just(WelcomeState(loggedOutName = MainConstants.LOGGED_OUT_NAME))
+    }
 
-    private fun login() =
-            exampleUserRepository
-                    .getUser()
-                    .map { LoggedInState(it.name) }
-                    .toFlowable()
+    private fun login(): Flowable<out MainViewState.PartialState> {
+        if ((0..1).random() == 1) {
+            publishEvent(MainEvent.LoginFailed)
+            return Flowable.empty()
+        }
+
+        return exampleUserRepository
+                .getUser()
+                .map { LoggedInState(it.name) }
+                .toFlowable()
+    }
+
 }

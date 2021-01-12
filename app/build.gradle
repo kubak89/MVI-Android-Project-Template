@@ -56,6 +56,7 @@ dependencies {
     implementation "io.reactivex.rxjava3:rxjava:${versions.rxJava}"
     implementation "io.reactivex.rxjava3:rxandroid:${versions.rxAndroid}"
     implementation "io.reactivex.rxjava3:rxkotlin:${versions.rxKotlin}"
+    implementation "com.github.akarnokd:rxjava3-extensions:${versions.rxExt}"
 
     implementation "com.jakewharton.rxbinding4:rxbinding:${versions.rxBinding}"
     implementation "com.jakewharton.rxbinding4:rxbinding-core:${versions.rxBinding}"

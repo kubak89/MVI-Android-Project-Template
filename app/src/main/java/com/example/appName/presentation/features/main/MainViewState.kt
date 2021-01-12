@@ -12,3 +12,7 @@ data class MainViewState(
         data class LoggedInState(val loggedInName: String) : PartialState()
     }
 }
+
+sealed class MainEvent {
+    object LoginFailed: MainEvent()
+}
