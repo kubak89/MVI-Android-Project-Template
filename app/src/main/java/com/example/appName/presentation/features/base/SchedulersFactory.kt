@@ -9,21 +9,18 @@ interface SchedulersFactory {
 
     val io: Scheduler
     val main: Scheduler
-    val reducer: Scheduler
+    val newExecutor: Scheduler
 
     companion object : SchedulersFactory {
-        private var instance: SchedulersFactory = Default()
+        private var instance: SchedulersFactory = Default
 
-        class Default : SchedulersFactory {
-
-            private val reducerExecutor = Executors.newSingleThreadExecutor()
-
+        object Default : SchedulersFactory {
             override val io
                 get() = Schedulers.io()
             override val main
                 get() = AndroidSchedulers.mainThread()
-            override val reducer: Scheduler
-                get() = Schedulers.from(reducerExecutor)
+            override val newExecutor: Scheduler
+                get() = Schedulers.newThread()
         }
 
 
@@ -36,7 +33,7 @@ interface SchedulersFactory {
             get() = instance.io
         override val main
             get() = instance.main
-        override val reducer: Scheduler
-            get() = instance.reducer
+        override val newExecutor: Scheduler
+            get() = instance.newExecutor
     }
 }

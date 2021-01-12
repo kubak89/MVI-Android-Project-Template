@@ -18,7 +18,8 @@ abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE, INTE
 
     private val mutableStateLiveData: MutableLiveData<VIEW_STATE> = MutableLiveData<VIEW_STATE>()
 
-    private var disposable: Disposable? = null
+    private val disposable: Disposable
+    private val reduceScheduler = SchedulersFactory.newExecutor
 
     init {
         @Suppress("LeakingThis")
@@ -37,7 +38,7 @@ abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE, INTE
 
     private fun subscribeToViewIntents(initialState: VIEW_STATE, flowables: Flowable<PARTIAL_VIEW_STATE>) =
             flowables
-                    .observeOn(SchedulersFactory.reducer)
+                    .observeOn(reduceScheduler)
                     .scan(initialState, this::reduceViewState)
                     .observeOn(SchedulersFactory.main)
                     .subscribe({ mutableStateLiveData.value = it }, { it.printStackTrace() })
