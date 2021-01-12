@@ -32,8 +32,10 @@ class MainPresenter @ViewModelInject constructor(
         return Flowable.just(WelcomeState(loggedOutName = MainConstants.LOGGED_OUT_NAME))
     }
 
+    private var loginCalls = 0
     private fun login(): Flowable<out MainViewState.PartialState> {
-        if ((0..1).random() == 1) {
+        loginCalls += 1
+        if (loginCalls == 2) {
             publishEvent(MainEvent.LoginFailed)
             return Flowable.empty()
         }
