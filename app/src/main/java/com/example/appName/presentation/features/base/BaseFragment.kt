@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
-import io.reactivex.rxjava3.disposables.Disposable
 import java.io.Serializable
 
 abstract class BaseFragment<VIEW_STATE : Serializable, PRESENTER : BasePresenter<VIEW_STATE, *, *>>(
@@ -16,8 +15,6 @@ abstract class BaseFragment<VIEW_STATE : Serializable, PRESENTER : BasePresenter
 
     abstract val presenter: PRESENTER
 
-    private var disposable: Disposable? = null
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(layoutId, null, false)
 
@@ -25,12 +22,6 @@ abstract class BaseFragment<VIEW_STATE : Serializable, PRESENTER : BasePresenter
         super.onViewCreated(view, savedInstanceState)
         observeViewState()
         bind()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-        disposable?.dispose()
     }
 
     private fun observeViewState() {

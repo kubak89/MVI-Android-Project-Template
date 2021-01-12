@@ -1,6 +1,5 @@
 package com.example.appName.presentation.features.main
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import com.example.appName.data.repository.exampleuser.ExampleUserRepository
 import com.example.appName.presentation.features.base.BasePresenter
