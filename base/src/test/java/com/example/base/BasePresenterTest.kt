@@ -7,40 +7,6 @@ import org.junit.Before
 import org.junit.Test
 import java.io.Serializable
 
-data class TestViewState(val count: Int) : Serializable
-sealed class TestIntent {
-    data class Add(val count: Int): TestIntent()
-    data class Sub(val count: Int): TestIntent()
-}
-sealed class TestPartialState {
-    data class Add(val count: Int): TestPartialState()
-    data class Sub(val count: Int): TestPartialState()
-}
-data class TestEvent(val what: String)
-
-class TestPresenter : BasePresenter<TestViewState, TestPartialState, TestIntent, TestEvent>(TestViewState(0)) {
-    override fun provideViewIntents(): Flowable<TestPartialState> {
-        return intentProcessor
-                .map {
-                    when(it) {
-                        is TestIntent.Add -> TestPartialState.Add(it.count)
-                        is TestIntent.Sub -> TestPartialState.Sub(it.count)
-                    }
-                }
-    }
-
-    override fun reduceViewState(previousState: TestViewState, partialState: TestPartialState): TestViewState {
-        return when(partialState) {
-            is TestPartialState.Add -> TestViewState(previousState.count + partialState.count)
-            is TestPartialState.Sub -> TestViewState(previousState.count - partialState.count)
-        }
-    }
-
-    fun publishTestEvent(event: TestEvent) {
-        publishEvent(event)
-    }
-}
-
 class BasePresenterTest {
     lateinit var UT: TestPresenter
 
@@ -119,4 +85,38 @@ class BasePresenterTest {
         to2.assertValueCount(3)
     }
 
+}
+
+data class TestViewState(val count: Int) : Serializable
+sealed class TestIntent {
+    data class Add(val count: Int): TestIntent()
+    data class Sub(val count: Int): TestIntent()
+}
+sealed class TestPartialState {
+    data class Add(val count: Int): TestPartialState()
+    data class Sub(val count: Int): TestPartialState()
+}
+data class TestEvent(val what: String)
+
+class TestPresenter : BasePresenter<TestViewState, TestPartialState, TestIntent, TestEvent>(TestViewState(0)) {
+    override fun provideViewIntents(): Flowable<TestPartialState> {
+        return intentProcessor
+                .map {
+                    when(it) {
+                        is TestIntent.Add -> TestPartialState.Add(it.count)
+                        is TestIntent.Sub -> TestPartialState.Sub(it.count)
+                    }
+                }
+    }
+
+    override fun reduceViewState(previousState: TestViewState, partialState: TestPartialState): TestViewState {
+        return when(partialState) {
+            is TestPartialState.Add -> TestViewState(previousState.count + partialState.count)
+            is TestPartialState.Sub -> TestViewState(previousState.count - partialState.count)
+        }
+    }
+
+    fun publishTestEvent(event: TestEvent) {
+        publishEvent(event)
+    }
 }

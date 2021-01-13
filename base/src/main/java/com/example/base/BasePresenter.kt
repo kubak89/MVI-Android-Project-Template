@@ -16,8 +16,8 @@ abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE, INTE
 ) : ViewModel() {
     protected val intentProcessor: FlowableProcessor<INTENT> = PublishProcessor.create()
 
-    val viewState: Observable<VIEW_STATE> get() = viewStateSubject
     private val viewStateSubject: BehaviorSubject<VIEW_STATE> = BehaviorSubject.create()
+    val viewState: Observable<VIEW_STATE> get() = viewStateSubject
 
     private val viewEventsSubject: UnicastWorkSubject<VIEW_EVENT> = UnicastWorkSubject.create()
     val viewEvents: Observable<VIEW_EVENT> get() = viewEventsSubject
