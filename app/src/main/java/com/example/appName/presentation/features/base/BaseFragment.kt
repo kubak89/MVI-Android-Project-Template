@@ -20,11 +20,6 @@ abstract class BaseFragment<VIEW_STATE : Serializable, VIEW_EVENT, PRESENTER : B
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(layoutId, null, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        bind()
-    }
-
     override fun onStart() {
         super.onStart()
 
@@ -45,9 +40,6 @@ abstract class BaseFragment<VIEW_STATE : Serializable, VIEW_EVENT, PRESENTER : B
         super.onStop()
         compositeDisposable.clear()
     }
-
-
-    open fun bind() {}
 
     abstract fun render(viewState: VIEW_STATE)
     abstract fun handle(viewEvent: VIEW_EVENT)

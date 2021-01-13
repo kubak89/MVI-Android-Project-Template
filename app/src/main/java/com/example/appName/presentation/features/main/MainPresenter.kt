@@ -10,7 +10,7 @@ import io.reactivex.rxjava3.core.Flowable
 class MainPresenter @ViewModelInject constructor(
         initialState: MainViewState,
         private val exampleUserRepository: ExampleUserRepository
-) : BasePresenter<MainViewState, MainViewState.PartialState, MainIntent, MainEvent>(initialState) {
+) : BasePresenter<MainViewState, MainViewState.PartialState, MainIntent, MainViewEvent>(initialState) {
 
     override fun reduceViewState(previousState: MainViewState, partialState: MainViewState.PartialState): MainViewState =
             when (partialState) {
@@ -36,7 +36,7 @@ class MainPresenter @ViewModelInject constructor(
     private fun login(): Flowable<out MainViewState.PartialState> {
         loginCalls += 1
         if (loginCalls == 2) {
-            publishEvent(MainEvent.LoginFailed)
+            publishEvent(MainViewEvent.LoginFailed)
             return Flowable.empty()
         }
 

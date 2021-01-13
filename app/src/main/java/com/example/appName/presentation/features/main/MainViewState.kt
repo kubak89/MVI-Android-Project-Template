@@ -13,6 +13,3 @@ data class MainViewState(
     }
 }
 
-sealed class MainEvent {
-    object LoginFailed: MainEvent()
-}

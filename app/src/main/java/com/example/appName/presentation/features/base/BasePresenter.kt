@@ -13,28 +13,25 @@ import java.io.Serializable
 abstract class BasePresenter<VIEW_STATE : Serializable, PARTIAL_VIEW_STATE, INTENT, VIEW_EVENT>(
         initialState: VIEW_STATE
 ) : ViewModel() {
-    val viewState: Observable<VIEW_STATE> get() = viewStateSubject
-
     protected val intentProcessor: FlowableProcessor<INTENT> = PublishProcessor.create()
 
+    val viewState: Observable<VIEW_STATE> get() = viewStateSubject
     private val viewStateSubject: BehaviorSubject<VIEW_STATE> = BehaviorSubject.create()
+
+    private val viewEventsSubject: UnicastWorkSubject<VIEW_EVENT> = UnicastWorkSubject.create()
+    val viewEvents: Observable<VIEW_EVENT> get() = viewEventsSubject
 
     private val disposable: Disposable
     private val reduceScheduler = SchedulersFactory.newExecutor
 
     init {
+        @Suppress("LeakingThis")
         disposable = subscribeToViewIntents(initialState, provideViewIntents())
     }
 
     override fun onCleared() {
-        super.onCleared()
         disposable.dispose()
     }
-
-
-    private val viewEventsSubject: UnicastWorkSubject<VIEW_EVENT> = UnicastWorkSubject.create()
-    val viewEvents: Observable<VIEW_EVENT> get() = viewEventsSubject
-
 
     protected fun publishEvent(event: VIEW_EVENT) {
         viewEventsSubject.onNext(event)

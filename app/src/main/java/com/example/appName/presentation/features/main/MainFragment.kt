@@ -10,7 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_main.*
 
 @AndroidEntryPoint
-class MainFragment : BaseFragment<MainViewState, MainEvent, MainPresenter>(R.layout.fragment_main) {
+class MainFragment : BaseFragment<MainViewState, MainViewEvent, MainPresenter>(R.layout.fragment_main) {
 
     override val presenter by viewModels<MainPresenter>()
 
@@ -40,9 +40,9 @@ class MainFragment : BaseFragment<MainViewState, MainEvent, MainPresenter>(R.lay
         }
     }
 
-    override fun handle(viewEvent: MainEvent) {
+    override fun handle(viewEvent: MainViewEvent) {
         when (viewEvent) {
-            is MainEvent.LoginFailed -> Toast.makeText(requireContext(), R.string.login_failed, Toast.LENGTH_SHORT).show()
+            is MainViewEvent.LoginFailed -> Toast.makeText(requireContext(), R.string.login_failed, Toast.LENGTH_SHORT).show()
         }
     }
 }
