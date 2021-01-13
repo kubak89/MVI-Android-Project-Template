@@ -3,9 +3,9 @@ package com.example.appName.presentation.features.main
 import com.example.appName.BaseTest
 import com.example.appName.data.model.ExampleUser
 import com.example.appName.data.repository.exampleuser.ExampleUserRepository
-import com.example.appName.presentation.features.base.SchedulersFactory
+import com.example.base.utils.SchedulersFactory
 import com.example.appName.presentation.features.main.MainConstants.LOGGED_OUT_NAME
-import com.example.appName.utils.TestSchedulersFactory
+import com.example.base.testutils.TestSchedulersFactory
 import io.reactivex.rxjava3.core.Single
 import org.junit.Before
 import org.junit.Test

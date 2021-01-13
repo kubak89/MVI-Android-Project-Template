@@ -1,4 +1,4 @@
-package com.example.appName.presentation.features.base
+package com.example.base.utils
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Scheduler

@@ -1,6 +1,6 @@
-package com.example.appName.utils
+package com.example.base.testutils
 
-import com.example.appName.presentation.features.base.SchedulersFactory
+import com.example.base.utils.SchedulersFactory
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.schedulers.Schedulers
 

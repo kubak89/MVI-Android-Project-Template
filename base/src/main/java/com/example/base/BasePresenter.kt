@@ -1,6 +1,7 @@
-package com.example.appName.presentation.features.base
+package com.example.base
 
 import androidx.lifecycle.ViewModel
+import com.example.base.utils.SchedulersFactory
 import hu.akarnokd.rxjava3.subjects.UnicastWorkSubject
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Observable

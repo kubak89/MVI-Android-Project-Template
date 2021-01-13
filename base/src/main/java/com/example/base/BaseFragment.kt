@@ -1,4 +1,4 @@
-package com.example.appName.presentation.features.base
+package com.example.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
+import com.example.base.utils.SchedulersFactory
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 import java.io.Serializable
