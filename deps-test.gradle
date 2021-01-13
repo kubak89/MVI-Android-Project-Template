@@ -1,0 +1,16 @@
+dependencies {
+    //region test dependencies
+    testImplementation "junit:junit:${versions.junit}"
+    testImplementation "org.mockito:mockito-inline:${versions.mockitoInline}"
+    testImplementation "com.nhaarman:mockito-kotlin:${versions.mockitoKotlin}"
+    testImplementation "androidx.arch.core:core-testing:${versions.archCoreTest}"
+    //endregion
+
+    //region instrumentation test dependencies
+    androidTestImplementation "androidx.test.ext:junit:${versions.junitext}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:${versions.espresso}"
+    androidTestImplementation "androidx.test:runner:${versions.runner}"
+    androidTestImplementation "org.awaitility:awaitility:${versions.awaitility}"
+    //endregion
+}

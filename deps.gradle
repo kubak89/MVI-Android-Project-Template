@@ -1,23 +1,19 @@
 dependencies {
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}"
-    api "androidx.core:core:${versions.core}"
-    api "androidx.core:core-ktx:${versions.core}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}"
+    implementation "androidx.core:core:${versions.core}"
+    implementation "androidx.core:core-ktx:${versions.core}"
 
-    api "androidx.fragment:fragment:${versions.fragment}"
-    api "androidx.appcompat:appcompat:${versions.appcompat}"
-    api "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
-    api "androidx.constraintlayout:constraintlayout:${versions.constraint}"
-    api "androidx.vectordrawable:vectordrawable:${versions.vector}"
-    api "androidx.multidex:multidex:${versions.multidex}"
+    implementation "androidx.fragment:fragment:${versions.fragment}"
+    implementation "androidx.appcompat:appcompat:${versions.appcompat}"
+    implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
+    implementation "androidx.constraintlayout:constraintlayout:${versions.constraint}"
+    implementation "androidx.vectordrawable:vectordrawable:${versions.vector}"
+    implementation "androidx.multidex:multidex:${versions.multidex}"
 
-    api "androidx.navigation:navigation-fragment-ktx:${versions.navigation}"
-    api "androidx.navigation:navigation-ui-ktx:${versions.navigation}"
+    implementation "androidx.navigation:navigation-fragment-ktx:${versions.navigation}"
+    implementation "androidx.navigation:navigation-ui-ktx:${versions.navigation}"
 
-    api "androidx.lifecycle:lifecycle-reactivestreams:${versions.lifecycle}"
-
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    implementation "androidx.lifecycle:lifecycle-reactivestreams:${versions.lifecycle}"
 
     //Hilt
     implementation "com.google.dagger:hilt-android:${versions.hilt}"
@@ -26,18 +22,17 @@ dependencies {
     kapt "androidx.hilt:hilt-compiler:${versions.hiltx}"
 
     //Rx
-    api "io.reactivex.rxjava3:rxjava:${versions.rxJava}"
-    api "io.reactivex.rxjava3:rxandroid:${versions.rxAndroid}"
-    api "io.reactivex.rxjava3:rxkotlin:${versions.rxKotlin}"
-    api "com.github.akarnokd:rxjava3-extensions:${versions.rxExt}"
+    implementation "io.reactivex.rxjava3:rxjava:${versions.rxJava}"
+    implementation "io.reactivex.rxjava3:rxandroid:${versions.rxAndroid}"
+    implementation "io.reactivex.rxjava3:rxkotlin:${versions.rxKotlin}"
+    implementation "com.github.akarnokd:rxjava3-extensions:${versions.rxExt}"
 
     //Retrofit
-    api "com.squareup.retrofit2:retrofit:${versions.retrofit}"
-    api "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
 
     //others
-    api "com.google.android.material:material:${versions.material}"
-    api "org.jetbrains.anko:anko-commons:${versions.anko}"
-    api "com.github.bumptech.glide:glide:${versions.glide}"
-
+    implementation "com.google.android.material:material:${versions.material}"
+    implementation "org.jetbrains.anko:anko-commons:${versions.anko}"
+    implementation "com.github.bumptech.glide:glide:${versions.glide}"
 }

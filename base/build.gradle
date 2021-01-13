@@ -1,7 +1,4 @@
-plugins {
-    id 'com.android.library'
-    id 'kotlin-android'
-}
+apply from: "$rootProject.projectDir/lib-plugs.gradle"
 
 android {
     compileSdkVersion 30
@@ -32,41 +29,10 @@ android {
     }
 }
 
+
+apply from: "$rootProject.projectDir/deps.gradle"
+apply from: "$rootProject.projectDir/deps-test.gradle"
+
 dependencies {
-
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}"
-    api "androidx.core:core:${versions.core}"
-    api "androidx.core:core-ktx:${versions.core}"
-
-    api "androidx.fragment:fragment:${versions.fragment}"
-    api "androidx.appcompat:appcompat:${versions.appcompat}"
-    api "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
-    api "androidx.constraintlayout:constraintlayout:${versions.constraint}"
-    api "androidx.vectordrawable:vectordrawable:${versions.vector}"
-    api "androidx.multidex:multidex:${versions.multidex}"
-
-    api "androidx.navigation:navigation-fragment-ktx:${versions.navigation}"
-    api "androidx.navigation:navigation-ui-ktx:${versions.navigation}"
-
-    api "androidx.lifecycle:lifecycle-reactivestreams:${versions.lifecycle}"
-
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-
-    //Rx
-    api "io.reactivex.rxjava3:rxjava:${versions.rxJava}"
-    api "io.reactivex.rxjava3:rxandroid:${versions.rxAndroid}"
-    api "io.reactivex.rxjava3:rxkotlin:${versions.rxKotlin}"
-    api "com.github.akarnokd:rxjava3-extensions:${versions.rxExt}"
-
-    //Retrofit
-    api "com.squareup.retrofit2:retrofit:${versions.retrofit}"
-    api "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
-
-    //others
-    api "com.google.android.material:material:${versions.material}"
-    api "org.jetbrains.anko:anko-commons:${versions.anko}"
-    api "com.github.bumptech.glide:glide:${versions.glide}"
 
 }

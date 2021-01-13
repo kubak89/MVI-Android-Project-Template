@@ -46,6 +46,7 @@ android {
 }
 
 apply from: "$rootProject.projectDir/deps.gradle"
+apply from: "$rootProject.projectDir/deps-test.gradle"
 
 dependencies {
     implementation project(path: ':base')
@@ -58,20 +59,6 @@ dependencies {
     debugImplementation "com.facebook.stetho:stetho:${versions.stetho}"
     debugImplementation "com.facebook.stetho:stetho-okhttp3:${versions.stetho}"
     debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leakCanary}"
-    //endregion
-
-    //region test dependencies
-    testImplementation "junit:junit:${versions.junit}"
-    testImplementation "org.mockito:mockito-inline:${versions.mockitoInline}"
-    testImplementation "com.nhaarman:mockito-kotlin:${versions.mockitoKotlin}"
-    testImplementation "androidx.arch.core:core-testing:2.1.0"
-    //endregion
-
-    //region instrumentation test dependencies
-    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
-    androidTestImplementation "androidx.test.espresso:espresso-intents:${versions.espresso}"
-    androidTestImplementation "androidx.test:runner:${versions.runner}"
-    androidTestImplementation "org.awaitility:awaitility:${versions.awaitility}"
     //endregion
 
     //region desugaring
