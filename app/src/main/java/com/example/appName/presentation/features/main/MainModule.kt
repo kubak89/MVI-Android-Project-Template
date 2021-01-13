@@ -1,5 +1,6 @@
 package com.example.appName.presentation.features.main
 
+import com.example.user.presentation.MainViewState
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

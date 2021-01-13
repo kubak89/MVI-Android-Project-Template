@@ -1,4 +1,4 @@
-package com.example.appName.presentation.features.main
+package com.example.user.presentation
 
 sealed class MainIntent {
     object Login : MainIntent()

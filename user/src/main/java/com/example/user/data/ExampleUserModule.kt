@@ -1,4 +1,4 @@
-package com.example.appName.data.repository.exampleuser
+package com.example.user.data
 
 import dagger.Module
 import dagger.Provides

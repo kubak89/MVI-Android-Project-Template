@@ -1,6 +1,6 @@
-package com.example.appName.presentation.features.main
+package com.example.user.presentation
 
-import com.example.appName.presentation.features.main.MainConstants.LOGGED_OUT_NAME
+import com.example.user.presentation.MainConstants.LOGGED_OUT_NAME
 import java.io.Serializable
 
 data class MainViewState(

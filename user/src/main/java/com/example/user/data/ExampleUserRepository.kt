@@ -1,6 +1,6 @@
-package com.example.appName.data.repository.exampleuser
+package com.example.user.data
 
-import com.example.appName.data.model.ExampleUser
+import com.example.user.model.ExampleUser
 import io.reactivex.rxjava3.core.Single
 
 interface ExampleUserRepository {

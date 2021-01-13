@@ -1,11 +1,11 @@
-package com.example.appName.presentation.features.main
+package com.example.user.presentation
 
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import com.example.appName.R
 import com.example.base.BaseFragment
+import com.example.user.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_main.*
 

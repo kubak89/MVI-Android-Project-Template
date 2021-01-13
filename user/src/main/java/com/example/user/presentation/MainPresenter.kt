@@ -1,10 +1,14 @@
-package com.example.appName.presentation.features.main
+package com.example.user.presentation
 
 import androidx.hilt.lifecycle.ViewModelInject
-import com.example.appName.data.repository.exampleuser.ExampleUserRepository
+import com.example.user.data.ExampleUserRepository
 import com.example.base.BasePresenter
-import com.example.appName.presentation.features.main.MainViewState.PartialState.LoggedInState
-import com.example.appName.presentation.features.main.MainViewState.PartialState.WelcomeState
+import com.example.user.presentation.MainViewState.PartialState.LoggedInState
+import com.example.user.presentation.MainViewState.PartialState.WelcomeState
+import com.example.user.presentation.MainConstants
+import com.example.user.presentation.MainIntent
+import com.example.user.presentation.MainViewEvent
+import com.example.user.presentation.MainViewState
 import io.reactivex.rxjava3.core.Flowable
 
 class MainPresenter @ViewModelInject constructor(
