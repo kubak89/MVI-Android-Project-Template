@@ -31,6 +31,7 @@ abstract class BaseFragment<VIEW_STATE : Serializable, VIEW_EVENT, PRESENTER : B
 
         presenter
                 .viewState
+                .distinctUntilChanged()
                 .observeOn(SchedulersFactory.main)
                 .subscribe(::render)
                 .addTo(compositeDisposable)
