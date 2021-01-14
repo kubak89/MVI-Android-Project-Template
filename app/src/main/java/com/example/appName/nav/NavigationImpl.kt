@@ -2,7 +2,7 @@ package com.example.appName.nav
 
 import androidx.navigation.NavController
 import com.example.appName.R
-import com.example.base.Navigation
+import com.example.base.nav.Navigation
 import javax.inject.Inject
 
 class NavigationImpl @Inject constructor(

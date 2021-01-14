@@ -5,7 +5,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.example.appName.MainActivity
 import com.example.appName.R
-import com.example.base.Navigation
+import com.example.base.nav.Navigation
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

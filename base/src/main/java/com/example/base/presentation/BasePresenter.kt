@@ -1,4 +1,4 @@
-package com.example.base
+package com.example.base.presentation
 
 import androidx.lifecycle.ViewModel
 import com.example.base.utils.SchedulersFactory

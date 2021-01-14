@@ -5,7 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import com.example.base.BaseFragment
+import com.example.base.presentation.BaseFragment
 import com.example.user.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_main.*

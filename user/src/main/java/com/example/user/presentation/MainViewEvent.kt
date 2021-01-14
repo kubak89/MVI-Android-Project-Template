@@ -1,6 +1,6 @@
 package com.example.user.presentation
 
-import com.example.base.Navigation
+import com.example.base.nav.Navigation
 
 sealed class MainViewEvent {
     object LoginFailed: MainViewEvent()

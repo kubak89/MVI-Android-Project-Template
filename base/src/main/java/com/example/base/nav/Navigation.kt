@@ -1,4 +1,4 @@
-package com.example.base
+package com.example.base.nav
 
 interface Navigation {
     sealed class Direction {

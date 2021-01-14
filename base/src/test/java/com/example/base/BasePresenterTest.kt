@@ -1,5 +1,6 @@
 package com.example.base
 
+import com.example.base.presentation.BasePresenter
 import com.example.base.testutils.TestSchedulersFactory
 import com.example.base.utils.SchedulersFactory
 import io.reactivex.rxjava3.core.Flowable
