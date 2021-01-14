@@ -1,4 +1,4 @@
-package com.example.appName.presentation.features.main
+package com.example.user.di
 
 import com.example.user.presentation.MainViewState
 import dagger.Module
