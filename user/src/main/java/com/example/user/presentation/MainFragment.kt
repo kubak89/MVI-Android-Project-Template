@@ -1,6 +1,7 @@
 package com.example.user.presentation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
@@ -22,6 +23,7 @@ class MainFragment : BaseFragment<MainViewState, MainViewEvent, MainPresenter>(R
 
     //region Render methods
     override fun render(viewState: MainViewState) {
+        Log.d("BRBR", "render: ${viewState}")
         renderText(viewState)
         renderButtonsVisibility(viewState)
     }
@@ -43,6 +45,7 @@ class MainFragment : BaseFragment<MainViewState, MainViewEvent, MainPresenter>(R
     override fun handle(viewEvent: MainViewEvent) {
         when (viewEvent) {
             is MainViewEvent.LoginFailed -> Toast.makeText(requireContext(), R.string.login_failed, Toast.LENGTH_SHORT).show()
+            is MainViewEvent.Navigate -> navigation.navigate(viewEvent.destination)
         }
     }
 }

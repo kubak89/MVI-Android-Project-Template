@@ -3,6 +3,7 @@ package com.example.user.presentation
 import androidx.hilt.lifecycle.ViewModelInject
 import com.example.user.data.ExampleUserRepository
 import com.example.base.BasePresenter
+import com.example.base.Navigation
 import com.example.user.presentation.MainViewState.PartialState.LoggedInState
 import com.example.user.presentation.MainViewState.PartialState.WelcomeState
 import com.example.user.presentation.MainConstants
@@ -41,6 +42,11 @@ class MainPresenter @ViewModelInject constructor(
         loginCalls += 1
         if (loginCalls == 2) {
             publishEvent(MainViewEvent.LoginFailed)
+            return Flowable.empty()
+        }
+
+        if (loginCalls == 3) {
+            publishEvent(MainViewEvent.Navigate(Navigation.Direction.toDemo))
             return Flowable.empty()
         }
 

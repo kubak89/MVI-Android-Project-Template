@@ -10,12 +10,15 @@ import com.example.base.utils.SchedulersFactory
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 import java.io.Serializable
+import javax.inject.Inject
 
 abstract class BaseFragment<VIEW_STATE : Serializable, VIEW_EVENT, PRESENTER : BasePresenter<VIEW_STATE, *, *, VIEW_EVENT>>(
         @LayoutRes val layoutId: Int
 ) : Fragment() {
 
     abstract val presenter: PRESENTER
+    @Inject protected lateinit var navigation: Navigation
+
     private val compositeDisposable = CompositeDisposable()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
