@@ -42,7 +42,11 @@ class MainPresenter @ViewModelInject constructor(
         }
 
         if (loginCalls == 3) {
-            publishEvent(MainViewEvent.Navigate(Navigation.Direction.toDemo))
+            publishEvent(
+                    MainViewEvent.Navigate(
+                            Navigation.Direction.toHomeScreen("Nice..")
+                    )
+            )
             return Flowable.empty()
         }
 
