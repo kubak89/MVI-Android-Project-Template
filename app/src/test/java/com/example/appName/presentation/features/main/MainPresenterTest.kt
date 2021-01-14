@@ -1,11 +1,11 @@
 package com.example.appName.presentation.features.main
 
 import com.example.appName.BaseTest
-import com.example.user.model.ExampleUser
-import com.example.user.data.ExampleUserRepository
-import com.example.base.utils.SchedulersFactory
-import com.example.user.presentation.MainConstants.LOGGED_OUT_NAME
 import com.example.base.testutils.TestSchedulersFactory
+import com.example.base.utils.SchedulersFactory
+import com.example.user.data.ExampleUserRepository
+import com.example.user.model.ExampleUser
+import com.example.user.presentation.MainConstants.LOGGED_OUT_NAME
 import com.example.user.presentation.MainIntent
 import com.example.user.presentation.MainPresenter
 import com.example.user.presentation.MainViewState

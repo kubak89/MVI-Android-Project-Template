@@ -11,9 +11,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.FragmentComponent
 import dagger.hilt.android.qualifiers.ActivityContext
-import dagger.hilt.components.SingletonComponent
-import kotlinx.android.synthetic.main.activity_main.view.*
-import java.lang.IllegalStateException
 
 @Module
 @InstallIn(FragmentComponent::class)

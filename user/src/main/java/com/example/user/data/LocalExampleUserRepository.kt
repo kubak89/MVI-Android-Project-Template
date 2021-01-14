@@ -1,7 +1,7 @@
 package com.example.user.data
 
-import com.example.user.model.ExampleUser
 import com.example.base.utils.SchedulersFactory
+import com.example.user.model.ExampleUser
 import io.reactivex.rxjava3.core.Single
 
 class LocalExampleUserRepository : ExampleUserRepository {

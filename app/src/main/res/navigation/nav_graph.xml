@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/login_fragment">
 
     <fragment
-        android:id="@+id/loginFragment"
+        android:id="@+id/login_fragment"
         android:name="com.example.user.presentation.MainFragment"
         >
         <action
-            android:id="@+id/actionLoginFragmentToDemoFragment"
-            app:destination="@id/demoFragment"
+            android:id="@+id/action_login_to_demo"
+            app:destination="@id/demo_fragment"
             app:popUpTo="@+id/nav_graph"
             app:popUpToInclusive="true"
             />
     </fragment>
 
     <fragment
-        android:id="@+id/demoFragment"
+        android:id="@+id/demo_fragment"
         android:name="com.example.home.HomeFragment"/>
 
 
