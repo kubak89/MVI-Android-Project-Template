@@ -18,7 +18,7 @@ class NavigationImpl @Inject constructor(
     override fun navigate(direction: Navigation.Direction) {
         when(direction) {
             is Navigation.Direction.toDemo -> {
-                navController.navigate(R.id.demoFragment)
+                navController.navigate(R.id.actionLoginFragmentToDemoFragment)
             }
         }
     }
