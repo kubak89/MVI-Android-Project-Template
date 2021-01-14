@@ -19,6 +19,4 @@
     <fragment
         android:id="@+id/demo_fragment"
         android:name="com.example.home.HomeFragment"/>
-
-
 </navigation>

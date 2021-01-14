@@ -1,8 +1,8 @@
 package com.example.user.presentation
 
 import androidx.hilt.lifecycle.ViewModelInject
-import com.example.base.presentation.BasePresenter
 import com.example.base.nav.Navigation
+import com.example.base.presentation.BasePresenter
 import com.example.user.data.ExampleUserRepository
 import com.example.user.presentation.MainViewState.PartialState.LoggedInState
 import com.example.user.presentation.MainViewState.PartialState.WelcomeState
