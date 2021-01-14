@@ -1,14 +1,13 @@
-apply from: "$rootProject.projectDir/lib-plugs.gradle"
+apply plugin: 'com.android.library'
+apply from: "$rootProject.projectDir/plugs.gradle"
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion config.compileSdk
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion config.minSdk
+        targetSdkVersion config.targetSdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
