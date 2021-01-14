@@ -2,6 +2,7 @@ package com.example.appName.presentation.features.main
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.appName.R
 import com.example.appName.presentation.features.base.BaseFragment
@@ -9,7 +10,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_main.*
 
 @AndroidEntryPoint
-class MainFragment : BaseFragment<MainViewState, MainPresenter>(R.layout.fragment_main) {
+class MainFragment : BaseFragment<MainViewState, MainViewEvent, MainPresenter>(R.layout.fragment_main) {
 
     override val presenter by viewModels<MainPresenter>()
 
@@ -36,6 +37,12 @@ class MainFragment : BaseFragment<MainViewState, MainPresenter>(R.layout.fragmen
         } else {
             login_button.visibility = View.VISIBLE
             logout_button.visibility = View.GONE
+        }
+    }
+
+    override fun handle(viewEvent: MainViewEvent) {
+        when (viewEvent) {
+            is MainViewEvent.LoginFailed -> Toast.makeText(requireContext(), R.string.login_failed, Toast.LENGTH_SHORT).show()
         }
     }
 }

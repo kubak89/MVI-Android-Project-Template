@@ -35,6 +35,7 @@ ext {
             rxBinding    : '4.0.0',
             rxJava       : '3.0.4',
             rxKotlin     : '3.0.0',
+            rxExt        : '3.0.1',
             vector       : '1.1.0',
             viewPager2   : '1.0.0',
 

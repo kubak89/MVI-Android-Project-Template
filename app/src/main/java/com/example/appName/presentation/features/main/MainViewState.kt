@@ -12,3 +12,4 @@ data class MainViewState(
         data class LoggedInState(val loggedInName: String) : PartialState()
     }
 }
+

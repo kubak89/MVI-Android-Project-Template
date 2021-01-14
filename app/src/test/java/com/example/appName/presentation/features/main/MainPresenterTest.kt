@@ -6,7 +6,6 @@ import com.example.appName.data.repository.exampleuser.ExampleUserRepository
 import com.example.appName.presentation.features.base.SchedulersFactory
 import com.example.appName.presentation.features.main.MainConstants.LOGGED_OUT_NAME
 import com.example.appName.utils.TestSchedulersFactory
-import com.example.appName.utils.test
 import io.reactivex.rxjava3.core.Single
 import org.junit.Before
 import org.junit.Test
@@ -30,7 +29,7 @@ class MainPresenterTest : BaseTest() {
         val mainPresenter = MainPresenter(initialState, exampleUserRepository)
 
         // when
-        val testObserver = mainPresenter.stateLiveData.test()
+        val testObserver = mainPresenter.viewState.test()
         mainPresenter.acceptIntent(MainIntent.Login)
 
         // then
@@ -47,7 +46,7 @@ class MainPresenterTest : BaseTest() {
         val mainPresenter = MainPresenter(initialState, exampleUserRepository)
 
         // when
-        val testObserver = mainPresenter.stateLiveData.test()
+        val testObserver = mainPresenter.viewState.test()
         mainPresenter.acceptIntent(MainIntent.Logout)
 
         // then
