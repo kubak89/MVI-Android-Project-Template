@@ -1,4 +1,4 @@
-package com.example.appName
+package com.example.user
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import io.reactivex.rxjava3.android.plugins.RxAndroidPlugins

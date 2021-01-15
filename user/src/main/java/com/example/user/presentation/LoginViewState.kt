@@ -1,9 +1,9 @@
 package com.example.user.presentation
 
-import com.example.user.presentation.MainConstants.LOGGED_OUT_NAME
+import com.example.user.presentation.LoginConstants.LOGGED_OUT_NAME
 import java.io.Serializable
 
-data class MainViewState(
+data class LoginViewState(
         val name: String = LOGGED_OUT_NAME,
         val isLoggedIn: Boolean = false
 ) : Serializable {

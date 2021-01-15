@@ -12,7 +12,7 @@ class NavigationImpl @Inject constructor(
     override fun navigate(direction: Navigation.Direction) {
         when(direction) {
             is Navigation.Direction.toHomeScreen -> {
-                navController.navigate(R.id.action_login_to_demo, HomeFragment.bundle(direction.text))
+                navController.navigate(R.id.action_login_to_home, HomeFragment.bundle(direction.text))
             }
         }
     }

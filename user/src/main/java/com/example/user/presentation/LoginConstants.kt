@@ -1,5 +1,5 @@
 package com.example.user.presentation
 
-object MainConstants {
+object LoginConstants {
     const val LOGGED_OUT_NAME = "Stranger"
 }

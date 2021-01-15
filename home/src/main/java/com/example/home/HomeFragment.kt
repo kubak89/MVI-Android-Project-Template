@@ -20,7 +20,7 @@ class HomeFragment : Fragment() {
     }
 
     companion object {
-        const val TEXT_ARG = "TEXT_ARG"
+        private const val TEXT_ARG = "TEXT_ARG"
 
         fun bundle(text: String): Bundle {
             return Bundle().apply {

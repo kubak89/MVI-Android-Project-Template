@@ -4,16 +4,16 @@ import androidx.hilt.lifecycle.ViewModelInject
 import com.example.base.nav.Navigation
 import com.example.base.presentation.BasePresenter
 import com.example.user.data.ExampleUserRepository
-import com.example.user.presentation.MainViewState.PartialState.LoggedInState
-import com.example.user.presentation.MainViewState.PartialState.WelcomeState
+import com.example.user.presentation.LoginViewState.PartialState.LoggedInState
+import com.example.user.presentation.LoginViewState.PartialState.WelcomeState
 import io.reactivex.rxjava3.core.Flowable
 
-class MainPresenter @ViewModelInject constructor(
-        initialState: MainViewState,
+class LoginPresenter @ViewModelInject constructor(
+        initialState: LoginViewState,
         private val exampleUserRepository: ExampleUserRepository
-) : BasePresenter<MainViewState, MainViewState.PartialState, MainIntent, MainViewEvent>(initialState) {
+) : BasePresenter<LoginViewState, LoginViewState.PartialState, LoginIntent, LoginViewEvent>(initialState) {
 
-    override fun reduceViewState(previousState: MainViewState, partialState: MainViewState.PartialState): MainViewState =
+    override fun reduceViewState(previousState: LoginViewState, partialState: LoginViewState.PartialState): LoginViewState =
             when (partialState) {
                 is WelcomeState ->
                     previousState.copy(name = partialState.loggedOutName, isLoggedIn = false)
@@ -21,29 +21,29 @@ class MainPresenter @ViewModelInject constructor(
                     previousState.copy(name = partialState.loggedInName, isLoggedIn = true)
             }
 
-    override fun provideViewIntents(): Flowable<MainViewState.PartialState> =
+    override fun provideViewIntents(): Flowable<LoginViewState.PartialState> =
             intentProcessor.flatMap {
                 when (it) {
-                    is MainIntent.Login -> login()
-                    MainIntent.Logout -> logout()
+                    is LoginIntent.Login -> login()
+                    LoginIntent.Logout -> logout()
                 }
             }
 
-    private fun logout(): Flowable<MainViewState.PartialState> {
-        return Flowable.just(WelcomeState(loggedOutName = MainConstants.LOGGED_OUT_NAME))
+    private fun logout(): Flowable<LoginViewState.PartialState> {
+        return Flowable.just(WelcomeState(loggedOutName = LoginConstants.LOGGED_OUT_NAME))
     }
 
     private var loginCalls = 0
-    private fun login(): Flowable<out MainViewState.PartialState> {
+    private fun login(): Flowable<out LoginViewState.PartialState> {
         loginCalls += 1
         if (loginCalls == 2) {
-            publishEvent(MainViewEvent.LoginFailed)
+            publishEvent(LoginViewEvent.LoginFailed)
             return Flowable.empty()
         }
 
         if (loginCalls == 3) {
             publishEvent(
-                    MainViewEvent.Navigate(
+                    LoginViewEvent.Navigate(
                             Navigation.Direction.toHomeScreen("Nice..")
                     )
             )
