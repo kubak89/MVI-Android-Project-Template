@@ -8,12 +8,10 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import com.example.base.nav.Navigation
 import com.example.base.utils.SchedulersFactory
-import dagger.Lazy
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 import java.io.Serializable
 import javax.inject.Inject
-import javax.inject.Provider
 
 abstract class BaseFragment<VIEW_STATE : Serializable, VIEW_EVENT, PRESENTER : BasePresenter<VIEW_STATE, *, *, VIEW_EVENT>>(
         @LayoutRes val layoutId: Int
