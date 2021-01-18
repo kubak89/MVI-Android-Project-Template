@@ -7,12 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.base.nav.Navigation
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import javax.inject.Provider
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    @Inject lateinit var navigation: Provider<Navigation>
+    @Inject lateinit var navigation: Navigation
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
             when (item.itemId) {
