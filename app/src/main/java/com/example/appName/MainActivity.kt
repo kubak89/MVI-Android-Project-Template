@@ -4,10 +4,15 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import com.example.base.nav.Navigation
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+import javax.inject.Provider
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    @Inject lateinit var navigation: Provider<Navigation>
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
             when (item.itemId) {
@@ -22,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
+
 
         if (!BuildConfig.DEBUG) {
             window.setFlags(

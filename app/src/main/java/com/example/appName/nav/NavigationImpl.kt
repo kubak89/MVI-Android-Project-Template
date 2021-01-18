@@ -1,17 +1,26 @@
 package com.example.appName.nav
 
-import androidx.navigation.NavController
+import android.content.Context
+import androidx.navigation.findNavController
+import com.example.appName.MainActivity
 import com.example.appName.R
+import com.example.base.nav.Direction
 import com.example.base.nav.Navigation
 import com.example.home.HomeFragment
+import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 
 class NavigationImpl @Inject constructor(
-        private val navController: NavController
+        @ActivityContext val context: Context
 ): Navigation {
-    override fun navigate(direction: Navigation.Direction) {
+
+    private val navController by lazy {
+        (context as MainActivity).findNavController(R.id.main_frame)
+    }
+
+    override fun navigate(direction: Direction) {
         when(direction) {
-            is Navigation.Direction.toHomeScreen -> {
+            is Direction.toHomeScreen -> {
                 navController.navigate(R.id.action_login_to_home, HomeFragment.bundle(direction.text))
             }
         }
