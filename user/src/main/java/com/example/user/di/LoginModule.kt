@@ -8,8 +8,8 @@ import dagger.hilt.android.components.ActivityComponent
 
 @Module
 @InstallIn(ActivityComponent::class)
-class MainModule {
+class LoginModule {
 
     @Provides
-    fun provideInitialMainViewState(): LoginViewState = LoginViewState()
+    fun provideInitialLoginViewState(): LoginViewState = LoginViewState()
 }
