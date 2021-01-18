@@ -1,35 +1,4 @@
-apply plugin: 'com.android.library'
-apply from: "$rootProject.projectDir/plugs.gradle"
-
-android {
-    compileSdkVersion config.compileSdk
-    buildToolsVersion config.buildToolsVersion
-
-    defaultConfig {
-        minSdkVersion config.minSdk
-        targetSdkVersion config.targetSdk
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
-}
-
-apply from: "$rootProject.projectDir/deps.gradle"
-apply from: "$rootProject.projectDir/deps-test.gradle"
+apply from: "$rootProject.projectDir/gradles/lib.gradle"
 
 dependencies {
     implementation project(path: ':base')

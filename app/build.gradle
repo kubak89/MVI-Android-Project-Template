@@ -1,7 +1,5 @@
 apply plugin: 'com.android.application'
-apply from: "$rootProject.projectDir/plugs.gradle"
-
-apply from: "$rootProject.projectDir/config.gradle"
+apply from: "$rootProject.projectDir/gradles/plugs.gradle"
 
 android {
 
@@ -31,7 +29,7 @@ android {
 
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
         kotlinOptions {
-            jvmTarget = "1.8"
+            jvmTarget = JavaVersion.VERSION_1_8
         }
     }
 
@@ -42,8 +40,8 @@ android {
     }
 }
 
-apply from: "$rootProject.projectDir/deps.gradle"
-apply from: "$rootProject.projectDir/deps-test.gradle"
+apply from: "$rootProject.projectDir/gradles/deps.gradle"
+apply from: "$rootProject.projectDir/gradles/deps-test.gradle"
 
 dependencies {
     implementation project(path: ':base')
