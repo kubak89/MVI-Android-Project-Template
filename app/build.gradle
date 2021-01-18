@@ -1,10 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'dagger.hilt.android.plugin'
-
-apply from: "$rootProject.projectDir/config.gradle"
+apply from: "$rootProject.projectDir/gradles/plugs.gradle"
 
 android {
 
@@ -34,7 +29,7 @@ android {
 
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
         kotlinOptions {
-            jvmTarget = "1.8"
+            jvmTarget = JavaVersion.VERSION_1_8
         }
     }
 
@@ -45,70 +40,21 @@ android {
     }
 }
 
+apply from: "$rootProject.projectDir/gradles/deps.gradle"
+apply from: "$rootProject.projectDir/gradles/deps-test.gradle"
+
 dependencies {
+    implementation project(path: ':base')
+    implementation project(path: ':home')
+    implementation project(path: ':user')
+
     //region implementation dependencies
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}"
-
-    implementation "com.google.dagger:hilt-android:${versions.hilt}"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:${versions.hiltx}"
-
-    implementation "io.reactivex.rxjava3:rxjava:${versions.rxJava}"
-    implementation "io.reactivex.rxjava3:rxandroid:${versions.rxAndroid}"
-    implementation "io.reactivex.rxjava3:rxkotlin:${versions.rxKotlin}"
-    implementation "com.github.akarnokd:rxjava3-extensions:${versions.rxExt}"
-
-    implementation "com.jakewharton.rxbinding4:rxbinding:${versions.rxBinding}"
-    implementation "com.jakewharton.rxbinding4:rxbinding-core:${versions.rxBinding}"
-    implementation "com.jakewharton.rxbinding4:rxbinding-appcompat:${versions.rxBinding}"
-    implementation "com.jakewharton.rxbinding4:rxbinding-recyclerview:${versions.rxBinding}"
-    implementation "com.jakewharton.rxbinding4:rxbinding-material:${versions.rxBinding}"
-
-    implementation "com.google.android.material:material:${versions.material}"
-    implementation "org.jetbrains.anko:anko-commons:${versions.anko}"
-    implementation "com.github.bumptech.glide:glide:${versions.glide}"
-
-    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
-    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
-
-    implementation "androidx.core:core:${versions.core}"
-    implementation "androidx.core:core-ktx:${versions.core}"
-    implementation "androidx.fragment:fragment:${versions.fragment}"
-    implementation "androidx.appcompat:appcompat:${versions.appcompat}"
-    implementation "androidx.lifecycle:lifecycle-extensions:${versions.lifecycle}"
-    implementation "androidx.constraintlayout:constraintlayout:${versions.constraint}"
-    implementation "androidx.vectordrawable:vectordrawable:${versions.vector}"
-    implementation "androidx.multidex:multidex:${versions.multidex}"
-
-    implementation "androidx.navigation:navigation-fragment-ktx:${versions.navigation}"
-    implementation "androidx.navigation:navigation-ui-ktx:${versions.navigation}"
-
-    implementation "androidx.lifecycle:lifecycle-reactivestreams:${versions.lifecycle}"
-    //endregion
-
-    //region kapt dependencies
-    kapt "com.google.dagger:hilt-android-compiler:${versions.hilt}"
-    kapt "androidx.hilt:hilt-compiler:${versions.hiltx}"
-    //endregion
 
     //region debug dependencies
     debugImplementation "com.facebook.stetho:stetho:${versions.stetho}"
     debugImplementation "com.facebook.stetho:stetho-okhttp3:${versions.stetho}"
     debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leakCanary}"
-    //endregion
-
-    //region test dependencies
-    testImplementation "junit:junit:${versions.junit}"
-    testImplementation "org.mockito:mockito-inline:${versions.mockitoInline}"
-    testImplementation "com.nhaarman:mockito-kotlin:${versions.mockitoKotlin}"
-    testImplementation "androidx.arch.core:core-testing:2.1.0"
-    //endregion
-
-    //region instrumentation test dependencies
-    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
-    androidTestImplementation "androidx.test.espresso:espresso-intents:${versions.espresso}"
-    androidTestImplementation "androidx.test:runner:${versions.runner}"
-    androidTestImplementation "org.awaitility:awaitility:${versions.awaitility}"
     //endregion
 
     //region desugaring

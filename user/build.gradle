@@ -1,0 +1,5 @@
+apply from: "$rootProject.projectDir/gradles/lib.gradle"
+
+dependencies {
+    implementation project(path: ':base')
+}

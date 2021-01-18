@@ -1,1 +1,4 @@
+include ':home'
+include ':user'
+include ':base'
 include ':app'

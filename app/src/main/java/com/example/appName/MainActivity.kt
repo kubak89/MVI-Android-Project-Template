@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import com.example.appName.presentation.features.main.MainFragment
+import com.example.base.nav.Navigation
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    @Inject lateinit var navigation: Navigation
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
             when (item.itemId) {
@@ -24,12 +27,6 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-        if (savedInstanceState == null) {
-            supportFragmentManager
-                    .beginTransaction()
-                    .add(R.id.main_frame, MainFragment())
-                    .commit()
-        }
 
         if (!BuildConfig.DEBUG) {
             window.setFlags(
