@@ -12,16 +12,16 @@ import javax.inject.Inject
 
 class NavigationImpl @Inject constructor(
         @ActivityContext val context: Context
-): Navigation {
+) : Navigation {
 
     private val navController by lazy {
         (context as MainActivity).findNavController(R.id.main_frame)
     }
 
     override fun navigate(direction: Direction) {
-        when(direction) {
+        when (direction) {
             is Direction.toHomeScreen -> {
-                navController.navigate(R.id.action_login_to_home, HomeFragment.bundle(direction.text))
+                navController.navigate(R.id.action_login_to_home, HomeFragment.bundle(context.getString(direction.textRes)))
             }
         }
     }

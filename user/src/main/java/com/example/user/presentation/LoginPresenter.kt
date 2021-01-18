@@ -3,6 +3,7 @@ package com.example.user.presentation
 import androidx.hilt.lifecycle.ViewModelInject
 import com.example.base.nav.Direction
 import com.example.base.presentation.BasePresenter
+import com.example.user.R
 import com.example.user.data.ExampleUserRepository
 import com.example.user.presentation.LoginViewState.PartialState.LoggedInState
 import com.example.user.presentation.LoginViewState.PartialState.WelcomeState
@@ -44,7 +45,7 @@ class LoginPresenter @ViewModelInject constructor(
         if (loginCalls == 3) {
             publishEvent(
                     LoginViewEvent.Navigate(
-                            Direction.toHomeScreen("Nice..")
+                            Direction.toHomeScreen(R.string.nice)
                     )
             )
             return Flowable.empty()
