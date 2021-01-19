@@ -25,18 +25,10 @@ class LoginFragment : BaseFragment<LoginViewState, LoginIntent, LoginViewEvent, 
         return mviView.rootView
     }
 
-    override fun render(viewState: LoginViewState) {
-        mviView.render(viewState)
-    }
-
     override fun handle(viewEvent: LoginViewEvent) {
         when (viewEvent) {
             is LoginViewEvent.LoginFailed -> Toast.makeText(requireContext(), R.string.login_failed, Toast.LENGTH_SHORT).show()
             is LoginViewEvent.Navigate -> navigation.navigate(viewEvent.destination)
         }
-    }
-
-    override fun onViewIntent(viewIntent: LoginIntent) {
-        presenter.acceptIntent(viewIntent)
     }
 }
