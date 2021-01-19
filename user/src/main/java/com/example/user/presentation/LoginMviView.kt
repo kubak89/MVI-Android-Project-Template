@@ -10,7 +10,8 @@ import com.example.user.R
 
 class LoginMviView(
         layoutInflater: LayoutInflater,
-        parent: ViewGroup?
+        parent: ViewGroup?,
+        override val acceptIntent: (LoginIntent) -> Unit
 ) : BaseMviView<LoginViewState, LoginIntent>() {
     override val rootView = layoutInflater.inflate(R.layout.fragment_login, parent, false)
 
@@ -20,11 +21,11 @@ class LoginMviView(
 
     init {
         loginButton.setOnClickListener {
-            onViewIntent(LoginIntent.Login)
+            acceptIntent(LoginIntent.Login)
         }
 
         logoutButton.setOnClickListener {
-            onViewIntent(LoginIntent.Logout)
+            acceptIntent(LoginIntent.Logout)
         }
     }
 
@@ -46,5 +47,4 @@ class LoginMviView(
             logoutButton.visibility = View.GONE
         }
     }
-
 }

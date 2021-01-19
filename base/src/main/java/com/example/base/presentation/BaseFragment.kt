@@ -10,14 +10,13 @@ import javax.inject.Inject
 
 abstract class BaseFragment<
         VIEW_STATE : Serializable,
-        VIEW_INTENT,
         VIEW_EVENT,
-        PRESENTER : BasePresenter<VIEW_STATE, *, VIEW_INTENT, VIEW_EVENT>>()
-    : Fragment(), BaseMviView.Listener<VIEW_INTENT>  {
+        PRESENTER : BasePresenter<VIEW_STATE, *, *, VIEW_EVENT>>()
+    : Fragment() {
 
     abstract val presenter: PRESENTER
 
-    abstract val mviView: BaseMviView<VIEW_STATE, VIEW_INTENT>
+    abstract val mviView: MviView<VIEW_STATE>
 
     @Inject
     protected lateinit var navigation: Navigation
@@ -38,18 +37,11 @@ abstract class BaseFragment<
                 .observeOn(SchedulersFactory.main)
                 .subscribe(::render)
                 .addTo(compositeDisposable)
-
-        mviView.registerListener(this)
     }
 
     override fun onStop() {
         super.onStop()
         compositeDisposable.clear()
-        mviView.unregisterListener(this)
-    }
-
-    override fun onViewIntent(viewIntent: VIEW_INTENT) {
-        presenter.acceptIntent(viewIntent)
     }
 
     open fun render(viewState: VIEW_STATE) {

@@ -7,13 +7,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.base.presentation.BaseFragment
-import com.example.base.presentation.BaseMviView
 import com.example.user.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment : BaseFragment<LoginViewState, LoginIntent, LoginViewEvent, LoginPresenter>(),
-        BaseMviView.Listener<LoginIntent> {
+class LoginFragment : BaseFragment<LoginViewState, LoginViewEvent, LoginPresenter>() {
 
     override val presenter by viewModels<LoginPresenter>()
 
@@ -21,7 +19,7 @@ class LoginFragment : BaseFragment<LoginViewState, LoginIntent, LoginViewEvent, 
     override val mviView get() = loginView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        loginView = LoginMviView(inflater, container)
+        loginView = LoginMviView(inflater, container, presenter::acceptIntent)
         return mviView.rootView
     }
 
