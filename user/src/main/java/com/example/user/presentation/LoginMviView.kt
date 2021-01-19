@@ -5,13 +5,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import com.example.base.presentation.MviObservableViewBase
+import com.example.base.presentation.MviViewBase
 import com.example.user.R
 
 class LoginMviView(
         layoutInflater: LayoutInflater,
         parent: ViewGroup?
-) : MviObservableViewBase<LoginViewState, LoginIntent>() {
+) : MviViewBase<LoginViewState, LoginIntent>() {
     override val rootView = layoutInflater.inflate(R.layout.fragment_login, parent, false)
 
     val mainText : TextView = rootView.findViewById(R.id.main_text)

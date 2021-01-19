@@ -7,13 +7,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import com.example.base.presentation.BaseFragment
-import com.example.base.presentation.MviObservableView
+import com.example.base.presentation.MviView
 import com.example.user.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<LoginViewState, LoginViewEvent, LoginPresenter>(),
-        MviObservableView.Listener<LoginIntent> {
+        MviView.Listener<LoginIntent> {
 
     override val presenter by viewModels<LoginPresenter>()
 
