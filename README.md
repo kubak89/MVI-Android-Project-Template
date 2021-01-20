@@ -50,6 +50,31 @@ The Android application devstarter project template that can be used to start wr
 
 6. Enjoy!
 
+## Templates
+
+As the MVI architecture used for presentation layer is quite complex, a helper templates solution has been provided.
+Its main goal is to auto-generate all the boilerplate code that constitutes a fully-functional screen.
+
+Templates solution was developerd with help of node.js 'plop' module: (https://plopjs.com/). 
+
+### Installation
+'plop' can be used in 2 ways: as a global npm module, or as a project dependency. 
+We recommend the latter one, as not to interfere with other node.js projects. Sections below describe the prefered way.
+
+'plop' is included in the project 'package.json' file, so to install it simply execute:
+`npm install`
+in the root folder.
+
+### Usage
+Currently there is one 'plop' generator defined ('screen', see plopfile.js). It generates all the code of an empty MVI screen
+within a new package.
+
+To generate the MVI boilerplate for 'newFeature' screen, follow instructions:
+1. Change directory to the target directory of the package (eg. ./user/src/main/java/com/example/user/presentation )
+2. Execute plop: `npm run plop screen newFeature`
+3. Enjoy content of ./user/src/main/java/com/example/user/presentation/newFeature
+
+
 ## CI/CD
 
 Example workflow for the [Jenkins](https://jenkins.io/) could be:
