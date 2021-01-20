@@ -1,0 +1,19 @@
+package {{ basePackage }}.{{camelCase name }}
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.example.base.presentation.BaseMviView
+import com.example.user.R
+
+class {{pascalCase name}}MviView(
+        layoutInflater: LayoutInflater,
+        parent: ViewGroup?,
+        override val acceptIntent: ({{pascalCase name}}Intent) -> Unit
+) : BaseMviView<{{pascalCase name}}ViewState, {{pascalCase name}}Intent>() {
+    override val rootView = TODO()
+
+    override fun render(viewState: {{pascalCase name}}ViewState) {
+        TODO()
+    }
+}

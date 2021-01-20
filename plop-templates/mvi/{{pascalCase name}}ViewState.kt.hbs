@@ -1,0 +1,8 @@
+package {{ basePackage }}.{{camelCase name }}
+
+import java.io.Serializable
+
+class {{pascalCase name}}ViewState() : Serializable {
+    sealed class PartialState {
+    }
+}
