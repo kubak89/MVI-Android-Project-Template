@@ -15,7 +15,7 @@ module.exports = function (plop) {
 	})
 
 	plop.setGenerator('mvi', {
-		description: 'this is a skeleton plopfile',
+		description: 'MVI boilerplate generator',
 		prompts: [{
 			type: 'input',
 			name: 'name',
