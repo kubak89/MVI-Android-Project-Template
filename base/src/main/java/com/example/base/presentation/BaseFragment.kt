@@ -16,8 +16,6 @@ abstract class BaseFragment<
 
     abstract val presenter: PRESENTER
 
-    abstract val mviView: MviView<VIEW_STATE>
-
     @Inject
     protected lateinit var navigation: Navigation
     protected val compositeDisposable = CompositeDisposable()
@@ -44,9 +42,6 @@ abstract class BaseFragment<
         compositeDisposable.clear()
     }
 
-    open fun render(viewState: VIEW_STATE) {
-        mviView.render(viewState)
-    }
-
+    abstract fun render(viewState: VIEW_STATE)
     abstract fun handle(viewEvent: VIEW_EVENT)
 }

@@ -16,11 +16,10 @@ class LoginFragment : BaseFragment<LoginViewState, LoginViewEvent, LoginPresente
     override val presenter by viewModels<LoginPresenter>()
 
     private lateinit var loginView: LoginMviView
-    override val mviView get() = loginView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         loginView = LoginMviView(inflater, container, presenter::acceptIntent)
-        return mviView.rootView
+        return loginView.rootView
     }
 
     override fun handle(viewEvent: LoginViewEvent) {
@@ -28,5 +27,9 @@ class LoginFragment : BaseFragment<LoginViewState, LoginViewEvent, LoginPresente
             is LoginViewEvent.LoginFailed -> Toast.makeText(requireContext(), R.string.login_failed, Toast.LENGTH_SHORT).show()
             is LoginViewEvent.Navigate -> navigation.navigate(viewEvent.destination)
         }
+    }
+
+    override fun render(viewState: LoginViewState) {
+        loginView.render(viewState)
     }
 }
