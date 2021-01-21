@@ -8,7 +8,12 @@ module.exports = function (plop) {
 
 	plop.addHelper('basePackage', function() {
 		const cwd = path.normalize(process.env["INIT_CWD"] || process.cwd());
-		const substringStart = cwd.indexOf('java/') + 5
+		const searchPattern = 'java/'
+		if (cwd.indexOf(searchPattern) == -1) {
+			throw "Cannot find a package-like directory structure. Are you in a valid directory?"
+		}
+
+		const substringStart = cwd.indexOf(searchPattern) + searchPattern.length
 		const package = cwd.substring(substringStart).replace(/\//g, ".")
 
 		return package;
