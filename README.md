@@ -52,23 +52,22 @@ The Android application devstarter project template that can be used to start wr
 
 ## Templates
 
-As the MVI architecture used for presentation layer is quite complex, a helper templates solution has been provided.
-Its main goal is to auto-generate all the boilerplate code that constitutes a fully-functional screen.
+To lower the effort of keeping a growing App consistent, a helper templates solution has been provided.
+Its main goal is to auto-generate all the boilerplate code that constitutes a fully-functional solution that complies with the architecture.
 
-Templates solution was developerd with help of node.js [plop](https://plopjs.com/) module: . 
+Templates solution was developed with help of node.js [plop](https://plopjs.com/) module. 
 
 ### Installation
-Plop can be used in 2 ways: as a global npm module, or as a project dependency. 
-We recommend the latter one, as not to interfere with other node.js projects. Sections below describe the prefered way.
+Plop can be used in 2 ways: as a global npm module, or as a project dependency. We recommend the latter one, as not to interfere with other node.js projects. Sections below describe the prefered way.
 
-Plop is included in the project 'package.json' file, so to install it simply execute:  
+Plop is included in the project `package.json` file, so to install it simply execute:  
 `npm install`  
 in the root folder.
 
 ### Usage
-Currently there is one plop _generator_ defined ('mvi', see plopfile.js). It generates all the code of an empty MVI screen within a new package.
+Currently there is one plop _generator_ defined ('mvi', see `plopfile.js`). It generates all the code of an empty MVI screen within a new package.
 
-To generate the MVI boilerplate for 'newFeature' screen, follow instructions:
+To generate the MVI boilerplate for, say, 'newFeature' screen, follow instructions:
 1. Change directory to the target directory of the package (eg. `./user/src/main/java/com/example/user/presentation` )
 2. Execute plop: `npm run plop mvi newFeature`
 3. Enjoy content of `./user/src/main/java/com/example/user/presentation/newFeature`

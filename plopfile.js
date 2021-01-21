@@ -9,7 +9,7 @@ module.exports = function (plop) {
 	plop.addHelper('basePackage', function() {
 		const cwd = path.normalize(process.env["INIT_CWD"] || process.cwd());
 		const substringStart = cwd.indexOf('java/') + 5
-		const package = cwd.substring(substringStart).replaceAll('/', '.')
+		const package = cwd.substring(substringStart).replace(/\//g, ".")
 
 		return package;
 	})
