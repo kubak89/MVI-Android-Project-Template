@@ -15,14 +15,16 @@ class {{pascalCase name}}Fragment : BaseFragment<{{pascalCase name}}ViewState, {
     override val presenter by viewModels<{{pascalCase name}}Presenter>()
 
     private lateinit var {{camelCase name}}View: {{pascalCase name}}MviView
-    override val mviView get() = {{camelCase name}}View
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         {{camelCase name}}View = {{pascalCase name}}MviView(inflater, container, presenter::acceptIntent)
-        return mviView.rootView
+        return {{camelCase name}}View.rootView
     }
 
     override fun handle(viewEvent: {{pascalCase name}}ViewEvent) {
-        TODO()
+    }
+
+    override fun render(viewState: {{pascalCase name}}ViewState) {
+        {{camelCase name}}View.render(viewState)
     }
 }
