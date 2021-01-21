@@ -20,7 +20,7 @@ jobs:
     - name: Clean
       run: ./gradlew clean --stacktrace
     - name: Apply template
-      run: sh -c 'cd ./user/src/main/java/com/example/user/presentation && npm run plop screen templateFeat'
+      run: sh -c 'cd ./user/src/main/java/com/example/user/presentation && npm run plop mvi templateFeat'
     - name: Build debug
       run: ./gradlew assembleDebug --stacktrace
     - name: Unit tests

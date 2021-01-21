@@ -14,7 +14,7 @@ module.exports = function (plop) {
 		return package;
 	})
 
-	plop.setGenerator('screen', {
+	plop.setGenerator('mvi', {
 		description: 'this is a skeleton plopfile',
 		prompts: [{
 			type: 'input',
@@ -25,8 +25,8 @@ module.exports = function (plop) {
 			{
 				type: "addMany",
 				destination: '{{currentDir}}/{{camelCase name}}',
-				base: `plop-templates/mvi`,
-				templateFiles: `plop-templates/mvi/*.hbs`
+				base: `.plop-templates/mvi`,
+				templateFiles: `.plop-templates/mvi/*.hbs`
 			  }
 		]
 	});
