@@ -1,0 +1,13 @@
+package {{ basePackage }}.{{camelCase name }}
+
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+
+@Module
+@InstallIn(ActivityComponent::class)
+class {{pascalCase name}}Module() {
+    @Provides
+    fun provideInitial{{pascalCase name}}ViewState(): {{pascalCase name}}ViewState = TODO()
+}

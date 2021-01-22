@@ -1,0 +1,30 @@
+package {{ basePackage }}.{{camelCase name }}
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import com.example.base.presentation.BaseFragment
+import com.example.user.R
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class {{pascalCase name}}Fragment : BaseFragment<{{pascalCase name}}ViewState, {{pascalCase name}}ViewEvent, {{pascalCase name}}Presenter>() {
+
+    override val presenter by viewModels<{{pascalCase name}}Presenter>()
+
+    private lateinit var {{camelCase name}}View: {{pascalCase name}}MviView
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        {{camelCase name}}View = {{pascalCase name}}MviView(inflater, container, presenter::acceptIntent)
+        return {{camelCase name}}View.rootView
+    }
+
+    override fun handle(viewEvent: {{pascalCase name}}ViewEvent) {
+    }
+
+    override fun render(viewState: {{pascalCase name}}ViewState) {
+        {{camelCase name}}View.render(viewState)
+    }
+}

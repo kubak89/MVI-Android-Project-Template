@@ -1,0 +1,18 @@
+package {{ basePackage }}.{{camelCase name }}
+
+import androidx.hilt.lifecycle.ViewModelInject
+import com.example.base.presentation.BasePresenter
+import io.reactivex.rxjava3.core.Flowable
+
+class {{pascalCase name}}Presenter @ViewModelInject constructor(
+        initialState: {{pascalCase name}}ViewState
+) : BasePresenter<{{pascalCase name}}ViewState, {{pascalCase name}}ViewState.PartialState, {{pascalCase name}}Intent, {{pascalCase name}}ViewEvent>(initialState) {
+
+    override fun reduceViewState(previousState: {{pascalCase name}}ViewState, partialState: {{pascalCase name}}ViewState.PartialState): {{pascalCase name}}ViewState {
+        TODO()
+    }
+
+    override fun provideViewIntents(): Flowable<{{pascalCase name}}ViewState.PartialState> {
+        TODO()
+    }
+}
